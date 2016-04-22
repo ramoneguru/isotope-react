@@ -9,15 +9,15 @@ var IndexRoute = ReactRouter.IndexRoute;
 var hashHistory = ReactRouter.hashHistory;
 
 var Main = require('../components/Main');
-var IsotopeStart = require('../components/IsotopeStart');
-var IsotopeDemo = require('../components/IsotopeDemo');
+var Splash = require('../components/Splash');
+var Demo = require('../components/Demo');
 
 
 var routes = (
 	<Router history={hashHistory}>
 		<Route path='/' component={Main}>
-			<IndexRoute component={IsotopeStart}/>
-			<Route path="isotopeDemo" header="Isotope Demo" component={IsotopeDemo}/>
+			<IndexRoute component={Splash}/>
+			<Route path="Demo" header="Isotope Demo" component={Demo}/>
 		</Route>
 	</Router>
 );
