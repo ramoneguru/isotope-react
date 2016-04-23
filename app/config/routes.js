@@ -10,14 +10,14 @@ var hashHistory = ReactRouter.hashHistory;
 
 var Main = require('../components/Main');
 var Splash = require('../components/Splash');
-var Demo = require('../components/Demo');
+var AtomContainer = require('../containers/AtomContainer');
 
 
 var routes = (
 	<Router history={hashHistory}>
 		<Route path='/' component={Main}>
 			<IndexRoute component={Splash}/>
-			<Route path="Demo" header="Isotope Demo" component={Demo}/>
+			<Route path="atom" header="Isotope Demo" component={AtomContainer}/>
 		</Route>
 	</Router>
 );
