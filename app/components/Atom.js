@@ -40,6 +40,16 @@ function Atom(props) {
 				value={props.atom_weight}
 				type="text"
 			/>
+			<input
+				className="hidden"
+				type="submit"
+				value="Post"
+			/>
+			<button
+				className="btn btn-block btn-success"
+				type="submit">
+				Add Atom
+			</button>
 		</form>
 	)
 }
