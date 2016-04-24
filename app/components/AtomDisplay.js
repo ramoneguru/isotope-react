@@ -5,9 +5,11 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 
-function Preview(props) {
+function AtomDisplay(props) {
 	var atomColor = {
-		backgroundColor: props.atomColor
+		backgroundColor: props.atomColor,
+		top: props.top,
+		left: props.left
 	};
 	return (
 		<div className="atom" style={atomColor}>
@@ -19,7 +21,7 @@ function Preview(props) {
 	)
 }
 
-Preview.propTypes = {
+AtomDisplay.propTypes = {
 	atomNumber: PropTypes.string.isRequired,
 	atomSymbol: PropTypes.string.isRequired,
 	atomName: PropTypes.string.isRequired,
@@ -27,4 +29,4 @@ Preview.propTypes = {
 	atomColor: PropTypes.string.isRequired
 };
 
-module.exports = Preview;
+module.exports = AtomDisplay;
