@@ -8,36 +8,53 @@ var PropTypes = React.PropTypes;
 function Atom(props) {
 	return (
 		<form onSubmit={props.onSubmitAtom}>
+			<label htmlFor="atomicNumber">Atomic Number</label>
 			<input
-				name="atomic_number"
+				id="atomicNumber"
+				maxLength="4"
 				className="form-control"
 				placeholder="Atomic Number"
 				onChange={props.onUpdateAtomNumber}
-				value={props.atom_number}
+				value={props.atomNumber}
 				type="text"
 			/>
+			<label htmlFor="atomicSymbol">Atomic Symbol</label>
 			<input
-				name="atomic_symbol"
+				id="atomicSymbol"
+				maxLength="2"
 				className="form-control"
 				placeholder="Atomic Symbol"
 				onChange={props.onUpdateAtomSymbol}
-				value={props.atom_symbol}
+				value={props.atomSymbol}
 				type="text"
 			/>
+			<label htmlFor="atomicName">Atomic Name</label>
 			<input
-				name="atomic_control"
+				id="atomicName"
+				maxLength="14"
 				className="form-control"
 				placeholder="Atomic Name"
 				onChange={props.onUpdateAtomName}
-				value={props.atom_name}
+				value={props.atomName}
 				type="text"
 			/>
+			<label htmlFor="atomicWeight">Atomic Weight</label>
 			<input
-				name="atomic_weight"
+				id="atomicWeight"
+				maxLength="12"
 				className="form-control"
 				placeholder="Atomic Weight"
 				onChange={props.onUpdateAtomWeight}
-				value={props.atom_weight}
+				value={props.atomWeight}
+				type="text"
+			/>
+			<label htmlFor="atomicColor">Atomic Color</label>
+			<input
+				id="atomicColor"
+				className="form-control"
+				placeholder="Atomic Color"
+				onChange={props.onUpdateAtomColor}
+				value={props.atomColor}
 				type="text"
 			/>
 			<input
@@ -59,7 +76,8 @@ Atom.propTypes = {
 	onUpdateAtomNumber: PropTypes.func.isRequired,
 	onUpdateAtomSymbol: PropTypes.func.isRequired,
 	onUpdateAtomName: PropTypes.func.isRequired,
-	onUpdateAtomWeight: PropTypes.func.isRequired
+	onUpdateAtomWeight: PropTypes.func.isRequired,
+	onUpdateAtomColor: PropTypes.func.isRequired
 };
 
 module.exports = Atom;

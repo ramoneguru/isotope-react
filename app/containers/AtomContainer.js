@@ -4,16 +4,19 @@
 
 var React = require('react');
 var Atom = require('../components/Atom');
+var AtomDisplay = require('../components/AtomDisplay');
+var Preview = require('../components/Preview');
+var List = require('../components/List');
 var update = require('react-addons-update');
 
-
-const AtomContainer = React.createClass({
+var AtomContainer = React.createClass({
 	getInitialState: function() {
 		return {
-			atomNumber: '',
-			atomSymbol: '',
-			atomName: '',
-			atomWeight: '',
+			atomNumber: '0',
+			atomSymbol: 'Ex',
+			atomName: 'Symbol name',
+			atomWeight: '0',
+			atomColor: '',
 			atomList: []
 		}
 	},
@@ -21,16 +24,15 @@ const AtomContainer = React.createClass({
 		var atom, list;
 		e.preventDefault();
 		atom = {
-			"atomSymbol": this.state.atomNumber,
-			"atomNumber": this.state.atomSymbol,
+			"atomNumber": this.state.atomNumber,
+			"atomSymbol": this.state.atomSymbol,
 			"atomName": this.state.atomName,
-			"atomWeight": this.state.atomWeight
+			"atomWeight": this.state.atomWeight,
+			"atomColor": this.state.atomColor
 		};
 		list = update(this.state.atomList, {$push: [atom]});
 		this.setState({
 			atomList: list
-		}, () => {
-			console.log(this.state)
 		});
 	},
 	handleUpdateAtomNumber: function(e) {
@@ -53,16 +55,34 @@ const AtomContainer = React.createClass({
 			atomWeight: e.target.value
 		});
 	},
+	handleUpdateAtomColor: function(e) {
+		this.setState({
+			atomColor: e.target.value
+		});
+	},
 
 	render: function() {
 		return (
-			<Atom
-				onSubmitAtom={this.handleSubmitAtom}
-				onUpdateAtomNumber={this.handleUpdateAtomNumber}
-				onUpdateAtomSymbol={this.handleUpdateAtomSymbol}
-				onUpdateAtomName={this.handleUpdateAtomName}
-				onUpdateAtomWeight={this.handleUpdateAtomWeight}
-			/>
+			<div className="atom-thing">
+				<Atom
+					onSubmitAtom={this.handleSubmitAtom}
+					onUpdateAtomNumber={this.handleUpdateAtomNumber}
+					onUpdateAtomSymbol={this.handleUpdateAtomSymbol}
+					onUpdateAtomName={this.handleUpdateAtomName}
+					onUpdateAtomWeight={this.handleUpdateAtomWeight}
+					onUpdateAtomColor={this.handleUpdateAtomColor}
+				/>
+				<Preview>
+					<AtomDisplay
+						atomNumber={this.state.atomNumber}
+						atomSymbol={this.state.atomSymbol}
+						atomName={this.state.atomName}
+						atomWeight={this.state.atomWeight}
+						atomColor={this.state.atomColor}
+					/>
+				</Preview>
+				<List atomList={this.state.atomList}/>
+			</div>
 		)
 	}
 });
