@@ -6,13 +6,13 @@ var React = require('react');
 var PropTypes = React.PropTypes;
 
 function AtomDisplay(props) {
-	var atomColor = {
+	var atomStyles = {
 		backgroundColor: props.atomColor,
 		top: props.top,
 		left: props.left
 	};
 	return (
-		<div className="atom" style={atomColor}>
+		<div className="atom" style={atomStyles}>
 			<div className="atom-number">{props.atomNumber}</div>
 			<div className="atom-symbol">{props.atomSymbol}</div>
 			<div className="atom-name">{props.atomName}</div>

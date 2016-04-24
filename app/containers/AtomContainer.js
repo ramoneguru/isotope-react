@@ -9,6 +9,8 @@ var Preview = require('../components/Preview');
 var List = require('../components/List');
 var update = require('react-addons-update');
 
+require('../styles/components/atom.scss');
+
 var AtomContainer = React.createClass({
 	getInitialState: function() {
 		return {
@@ -20,6 +22,7 @@ var AtomContainer = React.createClass({
 			atomList: []
 		}
 	},
+
 	handleSubmitAtom: function(e) {
 		var atom, list;
 		e.preventDefault();

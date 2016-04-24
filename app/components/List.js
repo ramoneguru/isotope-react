@@ -6,6 +6,8 @@ var React = require('react');
 var AtomDisplay = require('./AtomDisplay');
 
 function List(props) {
+	var listHeight = props.height;
+	var listWidth = props.width;
 	return(
 		<div className="atom-list">
 			{props.atomList.map((item, i) => {
@@ -15,6 +17,7 @@ function List(props) {
 					<AtomDisplay
 						key={i}
 						left={left}
+						top={top}
 						atomNumber={item.atomNumber}
 						atomSymbol={item.atomSymbol}
 						atomName={item.atomName}
