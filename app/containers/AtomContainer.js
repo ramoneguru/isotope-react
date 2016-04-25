@@ -8,6 +8,7 @@ var AtomDisplay = require('../components/AtomDisplay');
 var Preview = require('../components/Preview');
 var List = require('../components/List');
 var Sorter = require('../components/Sorter');
+var Filter = require('../components/Filter');
 
 var update = require('react-addons-update');
 
@@ -22,6 +23,8 @@ var AtomContainer = React.createClass({
 			atomWeight: '0',
 			atomColor: '',
 			originalIndex: 0,
+			visible: true,
+			atomType: 'metal',
 			top: "0px",
 			left: "0px",
 			atomList: [
@@ -32,6 +35,8 @@ var AtomContainer = React.createClass({
 					"atomWeight": "1.23",
 					"atomColor": "red",
 					"originalIndex": 0,
+					"visible": true,
+					"atomType": 'metal',
 					"top": "0px",
 					"left": "0px"
 				},
@@ -42,6 +47,8 @@ var AtomContainer = React.createClass({
 					"atomWeight": "1",
 					"atomColor": "teal",
 					"originalIndex": 1,
+					"visible": true,
+					"atomType": 'transition',
 					"top": "0px",
 					"left": "110px"
 				},
@@ -52,8 +59,22 @@ var AtomContainer = React.createClass({
 					"atomWeight": "32.3",
 					"atomColor": "blue",
 					"originalIndex": 2,
+					"visible": true,
+					"atomType": 'ium',
 					"top": "0px",
 					"left": "220px"
+				},
+				{
+					"atomNumber": "12",
+					"atomSymbol": "Se",
+					"atomName": "Iron",
+					"atomWeight": "32.3",
+					"atomColor": "blue",
+					"originalIndex": 3,
+					"visible": true,
+					"atomType": 'metal',
+					"top": "0px",
+					"left": "330px"
 				}
 			]
 		}
@@ -76,6 +97,8 @@ var AtomContainer = React.createClass({
 			"atomWeight": this.state.atomWeight,
 			"atomColor": this.state.atomColor,
 			"originalIndex": this.state.atomList.length - 1,
+			"visible": true,
+			"atomType": 'ium',
 			"top": "0px",
 			"left": left
 		};
@@ -111,6 +134,7 @@ var AtomContainer = React.createClass({
 	},
 	handleSorting: function(sortBy) {
 		var list = this.state.atomList.slice(0);
+
 		var sortedList = list.slice(0).sort((prev, curr) => {
 			return prev[sortBy] > curr[sortBy];
 		}).map((item, i) => {
@@ -120,6 +144,23 @@ var AtomContainer = React.createClass({
 		this.setState({
 			atomList: list
 		});
+	},
+	handleFiltering: function(filter) {
+		var list = this.state.atomList.slice(0);
+		var filterList = list.filter((item, i) => {
+			if(item.atomType === filter || filter === "all") {
+				item.visible = true;
+				return true;
+			} else {
+				item.visible = false;
+			}
+			return false;
+		});
+
+		this.setState({
+			atomList: list
+		});
+
 	},
 	render: function() {
 		return (
@@ -140,6 +181,7 @@ var AtomContainer = React.createClass({
 						atomWeight={this.state.atomWeight}
 						atomColor={this.state.atomColor}
 						originalIndex={this.state.originalIndex}
+						visible={this.state.visible}
 					/>
 				</Preview>
 				<Sorter
@@ -147,6 +189,12 @@ var AtomContainer = React.createClass({
 					onSortBySymbol={this.handleSorting.bind(this, 'atomSymbol')}
 					onSortByNumber={this.handleSorting.bind(this, 'atomNumber')}
 					onSortByOriginalOrder={this.handleSorting.bind(this, 'originalOrder')}
+				/>
+				<Filter
+					onFilterShowAll={this.handleFiltering.bind(this, 'all')}
+					onFilterMetal={this.handleFiltering.bind(this, 'metal')}
+					onFilterTransition={this.handleFiltering.bind(this, 'transition')}
+					onFilterIum={this.handleFiltering.bind(this, 'ium')}
 				/>
 				<List atomList={this.state.atomList}/>
 			</div>

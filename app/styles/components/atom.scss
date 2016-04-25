@@ -30,10 +30,6 @@ $atomBorder: $black;
   float: left;
 }
 
-.atom-list {
-
-}
-
 .atom-number {
   visibility: visible;
   font-size: 0.8em;
@@ -56,4 +52,32 @@ $atomBorder: $black;
 .atom-list {
   position: relative;
   clear: both;
+}
+
+.atom-enter {
+  animation: in 0.2s linear forwards;
+  -webkit-animation: in 0.2s linear forwards;
+}
+
+.atom-leave {
+  animation: out 0.2s linear forwards;
+  -webkit-animation: out 0.2s linear forwards;
+}
+
+@-webkit-keyframes in {
+  0% {
+    -webkit-transform: scale(0); opacity: 0;
+  }
+  100% {
+    -webkit-transform: scale(1); opacity: 1;
+  }
+}
+
+@-webkit-keyframes out {
+  0% {
+    -webkit-transform: scale(1); opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(0); opacity: 0;
+  }
 }

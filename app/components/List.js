@@ -22,6 +22,7 @@ function List(props) {
 						atomWeight={item.atomWeight}
 						atomColor={item.atomColor}
 						originalIndex={item.originalIndex}
+						visible={item.visible}
 					/>
 				)
 			})}
