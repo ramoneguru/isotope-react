@@ -63,11 +63,12 @@ var AtomContainer = React.createClass({
 		var atom, list, top, largest, left;
 		e.preventDefault();
 
-		// 110 is due to the width of the container + padding
 		largest = this.state.atomList.reduce((prev, curr) => {
 			return (parseInt(prev.left) > parseInt(curr.left)) ? prev : curr;
 		});
+		// 110 is due to the width of the container + padding
 		left = parseInt(largest.left) + 110 + "px";
+
 		atom = {
 			"atomNumber": this.state.atomNumber,
 			"atomSymbol": this.state.atomSymbol,
@@ -108,31 +109,17 @@ var AtomContainer = React.createClass({
 			atomColor: e.target.value
 		});
 	},
-	handleSortByName: function() {
-		var sortedList, finalList, list = this.state.atomList.slice(0);
-		sortedList = list.slice(0).sort((prev, curr) => {
-			return prev.atomName > curr.atomName;
-		});
-
-		console.log(sortedList, list);
-
-		var res = sortedList.map((item, i) => {
+	handleSorting: function(sortBy) {
+		var list = this.state.atomList.slice(0);
+		var sortedList = list.slice(0).sort((prev, curr) => {
+			return prev[sortBy] > curr[sortBy];
+		}).map((item, i) => {
 			item.left = i * 110 + "px";
 			return item;
 		});
-
-		console.log(res);
-		console.log(list);
-
 		this.setState({
 			atomList: list
-		})
-	},
-	handleSortBySymbol: function() {
-
-	},
-	handleSortByNumber: function() {
-
+		});
 	},
 	render: function() {
 		return (
@@ -156,9 +143,9 @@ var AtomContainer = React.createClass({
 					/>
 				</Preview>
 				<Sorter
-					onSortByName={this.handleSortByName}
-					onSortBySymbol={this.handleSortBySymbol}
-					onSortByNumber={this.handleSortByNumber}
+					onSortByName={this.handleSorting.bind(this, 'atomName')}
+					onSortBySymbol={this.handleSorting.bind(this, 'atomSymbol')}
+					onSortByNumber={this.handleSorting.bind(this, 'atomNumber')}
 				/>
 				<List atomList={this.state.atomList}/>
 			</div>

@@ -17,5 +17,3 @@ function Sorter(props) {
 }
 
 module.exports = Sorter;
-
-// 
