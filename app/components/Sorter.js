@@ -9,6 +9,7 @@ require('../styles/components/sorter.scss');
 function Sorter(props) {
 	return (
 		<div className="sort-list">
+			<button onClick={props.onSortByAll}>All</button>
 			<button onClick={props.onSortByName}>Name</button>
 			<button onClick={props.onSortBySymbol}>Symbol</button>
 			<button onClick={props.onSortByNumber}>Number</button>

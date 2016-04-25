@@ -134,8 +134,11 @@ var AtomContainer = React.createClass({
 	},
 	handleSorting: function(sortBy) {
 		var list = this.state.atomList.slice(0);
-
-		var sortedList = list.slice(0).sort((prev, curr) => {
+		var filterList = list.filter((item) => {
+			if(item.visible) {
+				return item;
+			}
+		}).slice(0).sort((prev, curr) => {
 			return prev[sortBy] > curr[sortBy];
 		}).map((item, i) => {
 			item.left = i * 110 + "px";
@@ -153,8 +156,11 @@ var AtomContainer = React.createClass({
 				return true;
 			} else {
 				item.visible = false;
+				return false;
 			}
-			return false;
+		}).map((item, i) => {
+			item.left = i * 110 + "px";
+			return item;
 		});
 
 		this.setState({
@@ -185,6 +191,7 @@ var AtomContainer = React.createClass({
 					/>
 				</Preview>
 				<Sorter
+					onSortByAll={this.handleFiltering.bind(this, 'all')}
 					onSortByName={this.handleSorting.bind(this, 'atomName')}
 					onSortBySymbol={this.handleSorting.bind(this, 'atomSymbol')}
 					onSortByNumber={this.handleSorting.bind(this, 'atomNumber')}
