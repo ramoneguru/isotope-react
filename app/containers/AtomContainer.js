@@ -81,10 +81,12 @@ var AtomContainer = React.createClass({
 	},
 
 	handleSubmitAtom: function(e) {
-		var atom, list, top, largest, left;
+		var atom, list, top, largest, left, visible;
 		e.preventDefault();
 
-		largest = this.state.atomList.reduce((prev, curr) => {
+		largest = this.state.atomList.filter((item) => {
+			return item.visible;
+		}).reduce((prev, curr) => {
 			return (parseInt(prev.left) > parseInt(curr.left)) ? prev : curr;
 		});
 		// 110 is due to the width of the container + padding
