@@ -49,6 +49,12 @@ function Atom(props) {
 					value={props.atomWeight}
 					type="text"
 				/>
+				<label htmlFor="atomicType">Atomic Type</label>
+				<select onChange={props.onUpdateAtomType} value={props.atomType}>
+					<option value="metal">Metal</option>
+					<option value="transition">Transition</option>
+					<option value="ium">-ium</option>
+				</select>
 				<label htmlFor="atomicColor">Atomic Color</label>
 				<input
 					id="atomicColor"
@@ -79,6 +85,7 @@ Atom.propTypes = {
 	onUpdateAtomSymbol: PropTypes.func.isRequired,
 	onUpdateAtomName: PropTypes.func.isRequired,
 	onUpdateAtomWeight: PropTypes.func.isRequired,
+	onUpdateAtomType: PropTypes.func.isRequired,
 	onUpdateAtomColor: PropTypes.func.isRequired
 };
 

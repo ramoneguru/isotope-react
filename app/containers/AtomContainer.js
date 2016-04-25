@@ -22,9 +22,9 @@ var AtomContainer = React.createClass({
 			atomName: 'Symbol name',
 			atomWeight: '0',
 			atomColor: '',
+			atomType: 'metal',
 			originalIndex: 0,
 			visible: true,
-			atomType: 'metal',
 			top: "0px",
 			left: "0px",
 			atomList: [
@@ -98,9 +98,9 @@ var AtomContainer = React.createClass({
 			"atomName": this.state.atomName,
 			"atomWeight": this.state.atomWeight,
 			"atomColor": this.state.atomColor,
+			"atomType": this.state.atomType,
 			"originalIndex": this.state.atomList.length - 1,
 			"visible": true,
-			"atomType": 'ium',
 			"top": "0px",
 			"left": left
 		};
@@ -134,6 +134,11 @@ var AtomContainer = React.createClass({
 			atomColor: e.target.value
 		});
 	},
+	handleUpdateAtomType: function(e) {
+		this.setState({
+			atomType: e.target.value
+		});
+	},
 	handleSorting: function(sortBy) {
 		var list = this.state.atomList.slice(0);
 		var filterList = list.filter((item) => {
@@ -142,10 +147,7 @@ var AtomContainer = React.createClass({
 			}
 		}).slice(0).sort((prev, curr) => {
 			return prev[sortBy] > curr[sortBy];
-		}).map((item, i) => {
-			item.left = i * 110 + "px";
-			return item;
-		});
+		}).map(this.setOffset);
 		this.setState({
 			atomList: list
 		});
@@ -160,15 +162,16 @@ var AtomContainer = React.createClass({
 				item.visible = false;
 				return false;
 			}
-		}).map((item, i) => {
-			item.left = i * 110 + "px";
-			return item;
-		});
+		}).map(this.setOffset);
 
 		this.setState({
 			atomList: list
 		});
 
+	},
+	setOffset: function(item, i) {
+		item.left = i * 110 + "px";
+		return item
 	},
 	render: function() {
 		return (
@@ -180,6 +183,7 @@ var AtomContainer = React.createClass({
 					onUpdateAtomName={this.handleUpdateAtomName}
 					onUpdateAtomWeight={this.handleUpdateAtomWeight}
 					onUpdateAtomColor={this.handleUpdateAtomColor}
+					onUpdateAtomType={this.handleUpdateAtomType}
 				/>
 				<Preview>
 					<AtomDisplay
