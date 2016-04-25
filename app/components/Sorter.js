@@ -12,6 +12,7 @@ function Sorter(props) {
 			<button onClick={props.onSortByName}>Name</button>
 			<button onClick={props.onSortBySymbol}>Symbol</button>
 			<button onClick={props.onSortByNumber}>Number</button>
+			<button onClick={props.onSortByOriginalOrder}>Original Order</button>
 		</div>
 	)
 }

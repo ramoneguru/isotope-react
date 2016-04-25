@@ -146,6 +146,7 @@ var AtomContainer = React.createClass({
 					onSortByName={this.handleSorting.bind(this, 'atomName')}
 					onSortBySymbol={this.handleSorting.bind(this, 'atomSymbol')}
 					onSortByNumber={this.handleSorting.bind(this, 'atomNumber')}
+					onSortByOriginalOrder={this.handleSorting.bind(this, 'originalOrder')}
 				/>
 				<List atomList={this.state.atomList}/>
 			</div>
