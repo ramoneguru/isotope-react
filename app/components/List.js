@@ -11,18 +11,17 @@ function List(props) {
 	return(
 		<div className="atom-list">
 			{props.atomList.map((item, i) => {
-				var top, left;
-				left = i * 110 + "px";
 				return (
 					<AtomDisplay
 						key={i}
-						left={left}
-						top={top}
+						left={item.left}
+						top={item.top}
 						atomNumber={item.atomNumber}
 						atomSymbol={item.atomSymbol}
 						atomName={item.atomName}
 						atomWeight={item.atomWeight}
 						atomColor={item.atomColor}
+						originalIndex={item.originalIndex}
 					/>
 				)
 			})}

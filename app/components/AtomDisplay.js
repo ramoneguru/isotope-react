@@ -26,7 +26,8 @@ AtomDisplay.propTypes = {
 	atomSymbol: PropTypes.string.isRequired,
 	atomName: PropTypes.string.isRequired,
 	atomWeight: PropTypes.string.isRequired,
-	atomColor: PropTypes.string.isRequired
+	atomColor: PropTypes.string.isRequired,
+	originalIndex: PropTypes.number.isRequired
 };
 
 module.exports = AtomDisplay;

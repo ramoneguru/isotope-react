@@ -9,8 +9,14 @@ $atomBorder: $black;
   padding: 5px 5px 5px 10px;
   position: absolute;
   top: 0;
-  transition: all 0.4s ease-out;
-  -webkit-transition: all 0.4s ease-out;
+  transition-delay: 0s;
+  transition-property: top, left;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-in;
+  -webkit-transition-delay: 0s;
+  -webkit-transition-property: top, left;
+  -webkit-transition-duration: 0.5s;
+  -webkit-transition-timing-function: ease-in;
   width: 100px;
 }
 
@@ -27,18 +33,22 @@ $atomBorder: $black;
 .atom-list {
 
 }
+
 .atom-number {
   visibility: visible;
   font-size: 0.8em;
   text-align: right;
 }
+
 .atom-symbol {
   font-size: 2.4em;
   font-weight: 600;
 }
+
 .atom-name {
   font-size: 0.8em;
 }
+
 .atom-weight {
   font-size: 0.8em;
 }
