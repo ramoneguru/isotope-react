@@ -96,7 +96,7 @@ var AtomContainer = React.createClass({
 			return (parseInt(prev.left) > parseInt(curr.left)) ? prev : curr;
 		});
 
-		left = parseInt(largest.left) + this.state.atom.width + this.state.atom.height;
+		left = parseInt(largest.left) + this.state.atom.width + this.state.atom.padding;
 
 		atom = {
 			"atomNumber": this.state.atom.atomNumber,
