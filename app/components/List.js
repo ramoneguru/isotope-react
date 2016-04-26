@@ -6,20 +6,10 @@ var React = require('react');
 var AtomDisplay = require('./AtomDisplay');
 
 var List = React.createClass({
-
-	componentWillMount: function() {
-		this.props.listWidth = "300px";
-	},
 	render: function () {
-		var listStyles = {
-			width: this.props.listWidth
-		};
 		return (
-			<div className="atom-list" style={listStyles}>
+			<div className="atom-list">
 				{this.props.atomList.map((item, i) => {
-					if((i + 1) * 110 > parseInt(listStyles.width)) {
-						item.top = "110px";
-					}
 					return (
 						<AtomDisplay
 							key={i}

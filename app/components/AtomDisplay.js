@@ -6,16 +6,20 @@ var React = require('react');
 var PropTypes = React.PropTypes;
 
 function AtomDisplay(props) {
-	var anim;
-	var atomStyles = {
+	var transform, atomStyles, atomLeave = '';
+	transform = (props.visible) ?
+	'translate3d('+props.left+'px, '+props.top+'px, 0px) scale(1)':
+	'translate3d('+props.left+'px, '+props.top+'px, 0px) scale(0)';
+
+	atomStyles = {
 		backgroundColor: props.atomColor,
-		top: props.top,
-		left: props.left
+		transform: transform
 	};
-	anim = (props.visible) ? "atom-enter" : "atom-leave";
+
+	atomLeave = (!props.visible) ? "atom-leave": "";
 
 	return (
-		<div className={"atom " + anim} style={atomStyles}>
+		<div className={"atom " + atomLeave } style={atomStyles}>
 			<div className="atom-number">{props.atomNumber}</div>
 			<div className="atom-symbol">{props.atomSymbol}</div>
 			<div className="atom-name">{props.atomName}</div>

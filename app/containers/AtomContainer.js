@@ -26,11 +26,13 @@ var AtomContainer = React.createClass({
 				atomType: 'metal',
 				originalIndex: 0,
 				visible: true,
-				top: "0px",
-				left: "0px"
+				top: "0",
+				left: "0",
+				width: 100,
+				height: 100,
+				padding: 10
 			},
-			listWidth: '',
-			listHeight: '',
+			atomListColumns: 3,
 			atomList: [
 				{
 					"atomNumber": "1",
@@ -41,8 +43,8 @@ var AtomContainer = React.createClass({
 					"originalIndex": 0,
 					"visible": true,
 					"atomType": 'metal',
-					"top": "0px",
-					"left": "0px"
+					"top": "0",
+					"left": "0"
 				},
 				{
 					"atomNumber": "22",
@@ -53,8 +55,8 @@ var AtomContainer = React.createClass({
 					"originalIndex": 1,
 					"visible": true,
 					"atomType": 'transition',
-					"top": "0px",
-					"left": "110px"
+					"top": "0",
+					"left": "110"
 				},
 				{
 					"atomNumber": "12",
@@ -65,8 +67,8 @@ var AtomContainer = React.createClass({
 					"originalIndex": 2,
 					"visible": true,
 					"atomType": 'ium',
-					"top": "0px",
-					"left": "220px"
+					"top": "0",
+					"left": "220"
 				},
 				{
 					"atomNumber": "12",
@@ -77,8 +79,8 @@ var AtomContainer = React.createClass({
 					"originalIndex": 3,
 					"visible": true,
 					"atomType": 'metal',
-					"top": "0px",
-					"left": "330px"
+					"top": "0",
+					"left": "330"
 				}
 			]
 		}
@@ -93,8 +95,8 @@ var AtomContainer = React.createClass({
 		}).reduce((prev, curr) => {
 			return (parseInt(prev.left) > parseInt(curr.left)) ? prev : curr;
 		});
-		// 110 is due to the width of the container + padding
-		left = parseInt(largest.left) + 110 + "px";
+
+		left = parseInt(largest.left) + this.state.atom.width + this.state.atom.height;
 
 		atom = {
 			"atomNumber": this.state.atom.atomNumber,
@@ -105,7 +107,7 @@ var AtomContainer = React.createClass({
 			"atomType": this.state.atom.atomType,
 			"originalIndex": this.state.atomList.length - 1,
 			"visible": true,
-			"top": "0px",
+			"top": "0",
 			"left": left
 		};
 		list = update(this.state.atomList, {$push: [atom]});
@@ -136,7 +138,7 @@ var AtomContainer = React.createClass({
 	},
 	handleFiltering: function(filter) {
 		var list = this.state.atomList.slice(0);
-		var filterList = list.filter((item, i) => {
+		var filterList = list.filter((item) => {
 			if(item.atomType === filter || filter === "all") {
 				item.visible = true;
 				return true;
@@ -152,7 +154,7 @@ var AtomContainer = React.createClass({
 
 	},
 	setOffset: function(item, i) {
-		item.left = i * 110 + "px";
+		item.left = i * 110;
 		return item
 	},
 	render: function() {

@@ -6,17 +6,14 @@ $atomBorder: $black;
   border: 1px solid $atomBorder;
   height: 100px;
   left: 0;
+  opacity: 1;
   padding: 5px 5px 5px 10px;
   position: absolute;
   top: 0;
   transition-delay: 0s;
-  transition-property: top, left;
+  transition-property: transform, opacity;
   transition-duration: 0.2s;
-  transition-timing-function: ease-in;
-  -webkit-transition-delay: 0s;
-  -webkit-transition-property: top, left;
-  -webkit-transition-duration: 0.2s;
-  -webkit-transition-timing-function: ease-in;
+  transition-timing-function: ease-out;
   width: 100px;
 }
 
@@ -54,30 +51,6 @@ $atomBorder: $black;
   clear: both;
 }
 
-.atom-enter {
-  animation: in 0.2s linear forwards;
-  -webkit-animation: in 0.2s linear forwards;
-}
-
 .atom-leave {
-  animation: out 0.2s linear forwards;
-  -webkit-animation: out 0.2s linear forwards;
-}
-
-@-webkit-keyframes in {
-  0% {
-    -webkit-transform: scale(0); opacity: 0;
-  }
-  100% {
-    -webkit-transform: scale(1); opacity: 1;
-  }
-}
-
-@-webkit-keyframes out {
-  0% {
-    -webkit-transform: scale(1); opacity: 1;
-  }
-  100% {
-    -webkit-transform: scale(0); opacity: 0;
-  }
+  opacity: 0;
 }
