@@ -29,6 +29,8 @@ function AtomDisplay(props) {
 }
 
 AtomDisplay.propTypes = {
+	top: PropTypes.number.isRequired,
+	left: PropTypes.number.isRequired,
 	atomNumber: PropTypes.string.isRequired,
 	atomSymbol: PropTypes.string.isRequired,
 	atomName: PropTypes.string.isRequired,

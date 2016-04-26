@@ -26,12 +26,12 @@ var AtomContainer = React.createClass({
 				atomType: 'metal',
 				originalIndex: 0,
 				visible: true,
-				top: "0",
-				left: "0",
-				width: 100,
-				height: 100,
-				padding: 10
+				top: 0,
+				left: 0
 			},
+			atomWidth: 100,
+			atomHeight: 100,
+			atomPadding: 10,
 			atomListColumns: 3,
 			atomList: [
 				{
@@ -43,8 +43,8 @@ var AtomContainer = React.createClass({
 					"originalIndex": 0,
 					"visible": true,
 					"atomType": 'metal',
-					"top": "0",
-					"left": "0"
+					"top": 0,
+					"left": 0
 				},
 				{
 					"atomNumber": "22",
@@ -55,8 +55,8 @@ var AtomContainer = React.createClass({
 					"originalIndex": 1,
 					"visible": true,
 					"atomType": 'transition',
-					"top": "0",
-					"left": "110"
+					"top": 0,
+					"left": 110
 				},
 				{
 					"atomNumber": "12",
@@ -67,8 +67,8 @@ var AtomContainer = React.createClass({
 					"originalIndex": 2,
 					"visible": true,
 					"atomType": 'ium',
-					"top": "0",
-					"left": "220"
+					"top": 0,
+					"left": 220
 				},
 				{
 					"atomNumber": "12",
@@ -79,24 +79,36 @@ var AtomContainer = React.createClass({
 					"originalIndex": 3,
 					"visible": true,
 					"atomType": 'metal',
-					"top": "0",
-					"left": "330"
+					"top": 110,
+					"left": 0
 				}
 			]
 		}
 	},
 
 	handleSubmitAtom: function(e) {
-		var atom, list, top, largest, left;
+		var atom, list, top, largest, left, mapping = [];
 		e.preventDefault();
 
 		largest = this.state.atomList.filter((item) => {
 			return item.visible;
 		}).reduce((prev, curr) => {
-			return (parseInt(prev.left) > parseInt(curr.left)) ? prev : curr;
+			return (prev.top > curr.top) ? prev : curr;
 		});
 
-		left = parseInt(largest.left) + this.state.atom.width + this.state.atom.padding;
+		if(this.state.atomList.length === 0) {
+			top = 0;
+			left = 0;
+		} else if(largest.left === 0) {
+			top = largest.top;
+			left = largest.left + this.state.atomWidth + this.state.atomPadding;
+		} else if(largest.left === ((this.state.atomListColumns - 1) * (this.state.atomWidth + this.state.atomPadding))) {
+			top = largest.top + this.state.atomHeight + this.state.atomPadding;
+			left = 0;
+		} else {
+			top = largest.top;
+			left = largest.left + this.state.atomWidth + this.state.atomPadding;
+		}
 
 		atom = {
 			"atomNumber": this.state.atom.atomNumber,
@@ -107,9 +119,10 @@ var AtomContainer = React.createClass({
 			"atomType": this.state.atom.atomType,
 			"originalIndex": this.state.atomList.length - 1,
 			"visible": true,
-			"top": "0",
+			"top": top,
 			"left": left
 		};
+
 		list = update(this.state.atomList, {$push: [atom]});
 		this.setState({
 			atomList: list
@@ -154,8 +167,19 @@ var AtomContainer = React.createClass({
 
 	},
 	setOffset: function(item, i) {
-		item.left = i * 110;
-		return item
+		var top, left, atomWidth = this.state.atomWidth + this.state.atomPadding,
+			atomHeight = this.state.atomWidth + this.state.atomPadding;
+
+		if(i % this.state.atomListColumns === 0) {
+			top = (i === 0) ? 0 : Math.floor(i / this.state.atomListColumns) * atomHeight;
+			left = 0;
+		} else {
+			top = Math.floor(i / this.state.atomListColumns) * atomHeight;
+			left = (i % this.state.atomListColumns) * atomWidth;
+		}
+		item.top = top;
+		item.left = left;
+		return item;
 	},
 	render: function() {
 		return (
@@ -178,6 +202,8 @@ var AtomContainer = React.createClass({
 						atomColor={this.state.atom.atomColor}
 						originalIndex={this.state.atom.originalIndex}
 						visible={this.state.atom.visible}
+						top={this.state.atom.top}
+						left={this.state.atom.left}
 					/>
 				</Preview>
 				<Sorter
@@ -195,7 +221,7 @@ var AtomContainer = React.createClass({
 				/>
 				<List
 					atomList={this.state.atomList}
-
+					atomListColumns={this.state.atomListColumns}
 				/>
 			</div>
 		)
