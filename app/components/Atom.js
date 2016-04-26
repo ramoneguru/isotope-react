@@ -9,57 +9,57 @@ function Atom(props) {
 	return (
 		<div className="atom-input">
 			<form onSubmit={props.onSubmitAtom}>
-				<label htmlFor="atomicNumber">Atomic Number</label>
+				<label htmlFor="atomNumber">Atom Number</label>
 				<input
-					id="atomicNumber"
+					id="atomNumber"
 					maxLength="4"
 					className="form-control"
-					placeholder="Atomic Number"
+					placeholder="atom Number"
 					onChange={props.onUpdateAtomNumber}
 					value={props.atomNumber}
 					type="text"
 				/>
-				<label htmlFor="atomicSymbol">Atomic Symbol</label>
+				<label htmlFor="atomSymbol">Atom Symbol</label>
 				<input
-					id="atomicSymbol"
+					id="atomSymbol"
 					maxLength="2"
 					className="form-control"
-					placeholder="Atomic Symbol"
+					placeholder="atom Symbol"
 					onChange={props.onUpdateAtomSymbol}
 					value={props.atomSymbol}
 					type="text"
 				/>
-				<label htmlFor="atomicName">Atomic Name</label>
+				<label htmlFor="atomName">Atom Name</label>
 				<input
-					id="atomicName"
+					id="atomName"
 					maxLength="14"
 					className="form-control"
-					placeholder="Atomic Name"
+					placeholder="atom Name"
 					onChange={props.onUpdateAtomName}
 					value={props.atomName}
 					type="text"
 				/>
-				<label htmlFor="atomicWeight">Atomic Weight</label>
+				<label htmlFor="atomWeight">Atom Weight</label>
 				<input
-					id="atomicWeight"
+					id="atomWeight"
 					maxLength="12"
 					className="form-control"
-					placeholder="Atomic Weight"
+					placeholder="atom Weight"
 					onChange={props.onUpdateAtomWeight}
 					value={props.atomWeight}
 					type="text"
 				/>
-				<label htmlFor="atomicType">Atomic Type</label>
+				<label htmlFor="atomType">Atom Type</label>
 				<select onChange={props.onUpdateAtomType} value={props.atomType}>
 					<option value="metal">Metal</option>
 					<option value="transition">Transition</option>
 					<option value="ium">-ium</option>
 				</select>
-				<label htmlFor="atomicColor">Atomic Color</label>
+				<label htmlFor="atomColor">Atom Color</label>
 				<input
-					id="atomicColor"
+					id="atomColor"
 					className="form-control"
-					placeholder="Atomic Color"
+					placeholder="atom Color"
 					onChange={props.onUpdateAtomColor}
 					value={props.atomColor}
 					type="text"

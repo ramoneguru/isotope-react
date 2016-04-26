@@ -13,7 +13,7 @@ function AtomDisplay(props) {
 		left: props.left
 	};
 	anim = (props.visible) ? "atom-enter" : "atom-leave";
-	
+
 	return (
 		<div className={"atom " + anim} style={atomStyles}>
 			<div className="atom-number">{props.atomNumber}</div>
@@ -30,7 +30,8 @@ AtomDisplay.propTypes = {
 	atomName: PropTypes.string.isRequired,
 	atomWeight: PropTypes.string.isRequired,
 	atomColor: PropTypes.string.isRequired,
-	originalIndex: PropTypes.number.isRequired
+	originalIndex: PropTypes.number.isRequired,
+	visible: PropTypes.bool.isRequired
 };
 
 module.exports = AtomDisplay;

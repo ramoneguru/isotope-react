@@ -17,16 +17,20 @@ require('../styles/components/atom.scss');
 var AtomContainer = React.createClass({
 	getInitialState: function() {
 		return {
-			atomNumber: '0',
-			atomSymbol: 'Ex',
-			atomName: 'Symbol name',
-			atomWeight: '0',
-			atomColor: '',
-			atomType: 'metal',
-			originalIndex: 0,
-			visible: true,
-			top: "0px",
-			left: "0px",
+			atom: {
+				atomNumber: '0',
+				atomSymbol: 'Ex',
+				atomName: 'Symbol name',
+				atomWeight: '0',
+				atomColor: '',
+				atomType: 'metal',
+				originalIndex: 0,
+				visible: true,
+				top: "0px",
+				left: "0px"
+			},
+			listWidth: '',
+			listHeight: '',
 			atomList: [
 				{
 					"atomNumber": "1",
@@ -81,7 +85,7 @@ var AtomContainer = React.createClass({
 	},
 
 	handleSubmitAtom: function(e) {
-		var atom, list, top, largest, left, visible;
+		var atom, list, top, largest, left;
 		e.preventDefault();
 
 		largest = this.state.atomList.filter((item) => {
@@ -93,12 +97,12 @@ var AtomContainer = React.createClass({
 		left = parseInt(largest.left) + 110 + "px";
 
 		atom = {
-			"atomNumber": this.state.atomNumber,
-			"atomSymbol": this.state.atomSymbol,
-			"atomName": this.state.atomName,
-			"atomWeight": this.state.atomWeight,
-			"atomColor": this.state.atomColor,
-			"atomType": this.state.atomType,
+			"atomNumber": this.state.atom.atomNumber,
+			"atomSymbol": this.state.atom.atomSymbol,
+			"atomName": this.state.atom.atomName,
+			"atomWeight": this.state.atom.atomWeight,
+			"atomColor": this.state.atom.atomColor,
+			"atomType": this.state.atom.atomType,
 			"originalIndex": this.state.atomList.length - 1,
 			"visible": true,
 			"top": "0px",
@@ -109,35 +113,13 @@ var AtomContainer = React.createClass({
 			atomList: list
 		});
 	},
-	handleUpdateAtomNumber: function(e) {
+	handleUpdateAtom: function(e) {
+		var updatedAtom, obj = {};
+		obj[e.target.id] = e.target.value;
+		updatedAtom = update(this.state.atom, {$merge: obj});
 		this.setState({
-			atomNumber: e.target.value
-		});
-	},
-	handleUpdateAtomSymbol: function(e) {
-		this.setState({
-			atomSymbol: e.target.value
-		});
-	},
-	handleUpdateAtomName: function(e) {
-		this.setState({
-			atomName: e.target.value
-		});
-	},
-	handleUpdateAtomWeight: function(e) {
-		this.setState({
-			atomWeight: e.target.value
-		});
-	},
-	handleUpdateAtomColor: function(e) {
-		this.setState({
-			atomColor: e.target.value
-		});
-	},
-	handleUpdateAtomType: function(e) {
-		this.setState({
-			atomType: e.target.value
-		});
+			atom: updatedAtom
+		})
 	},
 	handleSorting: function(sortBy) {
 		var list = this.state.atomList.slice(0);
@@ -145,7 +127,7 @@ var AtomContainer = React.createClass({
 			if(item.visible) {
 				return item;
 			}
-		}).slice(0).sort((prev, curr) => {
+		}).sort((prev, curr) => {
 			return prev[sortBy] > curr[sortBy];
 		}).map(this.setOffset);
 		this.setState({
@@ -175,25 +157,25 @@ var AtomContainer = React.createClass({
 	},
 	render: function() {
 		return (
-			<div className="atom-thing">
+			<div className="atom-container">
 				<Atom
 					onSubmitAtom={this.handleSubmitAtom}
-					onUpdateAtomNumber={this.handleUpdateAtomNumber}
-					onUpdateAtomSymbol={this.handleUpdateAtomSymbol}
-					onUpdateAtomName={this.handleUpdateAtomName}
-					onUpdateAtomWeight={this.handleUpdateAtomWeight}
-					onUpdateAtomColor={this.handleUpdateAtomColor}
-					onUpdateAtomType={this.handleUpdateAtomType}
+					onUpdateAtomNumber={this.handleUpdateAtom}
+					onUpdateAtomSymbol={this.handleUpdateAtom}
+					onUpdateAtomName={this.handleUpdateAtom}
+					onUpdateAtomWeight={this.handleUpdateAtom}
+					onUpdateAtomColor={this.handleUpdateAtom}
+					onUpdateAtomType={this.handleUpdateAtom}
 				/>
 				<Preview>
 					<AtomDisplay
-						atomNumber={this.state.atomNumber}
-						atomSymbol={this.state.atomSymbol}
-						atomName={this.state.atomName}
-						atomWeight={this.state.atomWeight}
-						atomColor={this.state.atomColor}
-						originalIndex={this.state.originalIndex}
-						visible={this.state.visible}
+						atomNumber={this.state.atom.atomNumber}
+						atomSymbol={this.state.atom.atomSymbol}
+						atomName={this.state.atom.atomName}
+						atomWeight={this.state.atom.atomWeight}
+						atomColor={this.state.atom.atomColor}
+						originalIndex={this.state.atom.originalIndex}
+						visible={this.state.atom.visible}
 					/>
 				</Preview>
 				<Sorter
@@ -209,7 +191,10 @@ var AtomContainer = React.createClass({
 					onFilterTransition={this.handleFiltering.bind(this, 'transition')}
 					onFilterIum={this.handleFiltering.bind(this, 'ium')}
 				/>
-				<List atomList={this.state.atomList}/>
+				<List
+					atomList={this.state.atomList}
+
+				/>
 			</div>
 		)
 	}
