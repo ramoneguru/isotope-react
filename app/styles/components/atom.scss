@@ -23,6 +23,10 @@ $atomBorder: $black;
 	transition-property: transform, opacity;
 	transition-duration: 0.2s;
 	transition-timing-function: ease-out;
+	-webkit-transition-delay: 0s;
+	-webkit-transition-property: transform, opacity;
+	-webkit-transition-duration: 0.2s;
+	-webkit-transition-timing-function: ease-out;
 	width: 100px;
 	&.leave {
 		opacity: 0;

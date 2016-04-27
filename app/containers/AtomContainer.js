@@ -143,8 +143,9 @@ var AtomContainer = React.createClass({
 				return item;
 			}
 		}).sort((prev, curr) => {
-			return prev[sortBy] > curr[sortBy];
+			return this.setSort(prev, curr, sortBy);
 		}).map(this.setOffset);
+
 		this.setState({
 			atomList: list
 		});
@@ -165,6 +166,11 @@ var AtomContainer = React.createClass({
 			atomList: list
 		});
 
+	},
+	setSort: function(a, b, sortBy) {
+		if(a[sortBy] > b[sortBy]) { return 1; }
+		if(a[sortBy] < b[sortBy]) { return -1; }
+		return 0;
 	},
 	setOffset: function(item, i) {
 		var top, left, atomWidth = this.state.atomWidth + this.state.atomPadding,
