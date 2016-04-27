@@ -19,7 +19,7 @@ function AtomDisplay(props) {
 	};
 
 	return (
-		<div className={"atom " + atomLeave } style={atomStyles}>
+		<div className={"atom " + atomLeave} style={atomStyles}>
 			<div className="atom-number">{props.atomNumber}</div>
 			<div className="atom-symbol">{props.atomSymbol}</div>
 			<div className="atom-name">{props.atomName}</div>

@@ -9,6 +9,7 @@ var Preview = require('../components/Preview');
 var List = require('../components/List');
 var Sorter = require('../components/Sorter');
 var Filter = require('../components/Filter');
+var Helpers = require('../utils/isotopeHelpers');
 
 var update = require('react-addons-update');
 
@@ -87,14 +88,14 @@ var AtomContainer = React.createClass({
 	},
 
 	handleSubmitAtom: function(e) {
-		var atom, list, top, largest, left, mapping = [];
+		var atom, list, top, largest, left;
 		e.preventDefault();
 
 		largest = this.state.atomList.filter((item) => {
 			return item.visible;
 		}).reduce((prev, curr) => {
 			return (prev.top > curr.top) ? prev : curr;
-		});
+		}, 0);
 
 		if(this.state.atomList.length === 0) {
 			top = 0;
@@ -143,7 +144,7 @@ var AtomContainer = React.createClass({
 				return item;
 			}
 		}).sort((prev, curr) => {
-			return this.setSort(prev, curr, sortBy);
+			return Helpers.determineSort(prev, curr, sortBy);
 		}).map(this.setOffset);
 
 		this.setState({
@@ -166,11 +167,6 @@ var AtomContainer = React.createClass({
 			atomList: list
 		});
 
-	},
-	setSort: function(a, b, sortBy) {
-		if(a[sortBy] > b[sortBy]) { return 1; }
-		if(a[sortBy] < b[sortBy]) { return -1; }
-		return 0;
 	},
 	setOffset: function(item, i) {
 		var top, left, atomWidth = this.state.atomWidth + this.state.atomPadding,

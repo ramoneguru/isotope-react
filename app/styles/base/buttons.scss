@@ -1,4 +1,16 @@
+@import './colors';
+
 .btn {
-	display: block;
+	display: inline-block;
+	padding: 0.5em 1.0em;
+	background: $white;
+	border: none;
+	border-radius: 7px;
+	background-image: linear-gradient( to bottom, hsla(0, 0%, 0%, 0), hsla(0, 0%, 0%, 0.2) );
+	color: $black;
+	font-family: sans-serif;
+	font-size: 16px;
+	text-shadow: 0 1px $white;
+	cursor: pointer;
 }
 

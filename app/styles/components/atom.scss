@@ -36,15 +36,17 @@ $atomBorder: $black;
 .atom-input {
 	border: 1px solid $atomBorder;
 	padding: 20px;
-	margin: 20px;
+	margin: 20px 0 20px 0;
+	display: flex;
+	justify-content: flex-start;
 	.atom-form {
 
 	}
 }
 
 .atom-preview {
-	border: 1px solid $atomBorder;
 	position: relative;
+	margin: 20px;
 	height: 100px;
 	width: 100px;
 }
