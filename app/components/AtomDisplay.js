@@ -15,7 +15,8 @@ function AtomDisplay(props) {
 	atomStyles = {
 		backgroundColor: props.atomColor,
 		transform: transform,
-		WebkitTransform: transform
+		WebkitTransform: transform,
+		msTransform: transform
 	};
 
 	return (

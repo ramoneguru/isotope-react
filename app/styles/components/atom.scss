@@ -9,6 +9,7 @@ $atomBorder: $black;
 	flex-wrap: wrap;
 	justify-content: center;
 	margin: 0;
+	padding: 10px;
 }
 
 .atom {
@@ -35,18 +36,22 @@ $atomBorder: $black;
 
 .atom-input {
 	border: 1px solid $atomBorder;
-	padding: 20px;
 	margin: 20px 0 20px 0;
 	display: flex;
 	justify-content: flex-start;
-	.atom-form {
-
+}
+#atom-form {
+	label {
+		padding: 5px 5px 5px 0;
+	}
+	input[type="text"] {
+		padding: 5px;
 	}
 }
 
 .atom-preview {
 	position: relative;
-	margin: 20px;
+	margin: 20px 0 20px 25px;
 	height: 100px;
 	width: 100px;
 }
@@ -84,7 +89,7 @@ $atomBorder: $black;
 		width: 600px;
 		flex-direction: row;
 		flex-wrap: wrap;
-		justify-content: center;
+		justify-content: flex-start;
 		margin: auto;
 	}
 }
