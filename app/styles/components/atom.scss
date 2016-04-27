@@ -1,6 +1,7 @@
 @import "../base/colors";
 
 $atomBorder: $black;
+$atomContainerBackground: $blackDark;
 
 .atom-container {
 	display: flex;
@@ -10,6 +11,8 @@ $atomBorder: $black;
 	justify-content: center;
 	margin: 0;
 	padding: 10px;
+	background-color: #191919;
+	color: $white;
 }
 
 .atom {
@@ -35,7 +38,6 @@ $atomBorder: $black;
 }
 
 .atom-input {
-	border: 1px solid $atomBorder;
 	margin: 20px 0 20px 0;
 	display: flex;
 	justify-content: flex-start;
@@ -46,6 +48,10 @@ $atomBorder: $black;
 	}
 	input[type="text"] {
 		padding: 5px;
+	}
+	.atom-select {
+		border: 0;
+		width: 100%;
 	}
 }
 
@@ -81,6 +87,14 @@ $atomBorder: $black;
 	width: 500px;
 	height: 300px;
 	border: 1px solid $atomBorder;
+}
+
+.error {
+	visibility: hidden;
+	height: 15px;
+	font-size: 0.8em;
+	color: $red;
+	padding: 5px 0;
 }
 
 @media (min-width: 1200px) {

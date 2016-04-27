@@ -1,3 +1,6 @@
+@import "../base/colors";
+$backgroundColor: $greyBlack;
+
 * {
 	box-sizing: border-box;
 }
@@ -6,6 +9,7 @@ html {
 	font-family: "Verdana, Geneva", sans-serif;
 	font-size: 16px;
 	-webkit-text-size-adjust: none;
+	background: $backgroundColor;
 }
 
 label {

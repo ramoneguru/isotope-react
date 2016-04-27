@@ -19,6 +19,7 @@ function Atom(props) {
 					value={props.atomNumber}
 					type="text"
 				/>
+				<div className="error atomNumber"></div>
 				<label htmlFor="atomSymbol">Atom Symbol</label>
 				<input
 					id="atomSymbol"
@@ -29,6 +30,7 @@ function Atom(props) {
 					value={props.atomSymbol}
 					type="text"
 				/>
+				<div className="error atomSymbol"></div>
 				<label htmlFor="atomName">Atom Name</label>
 				<input
 					id="atomName"
@@ -39,6 +41,7 @@ function Atom(props) {
 					value={props.atomName}
 					type="text"
 				/>
+				<div className="error atomName"></div>
 				<label htmlFor="atomWeight">Atom Weight</label>
 				<input
 					id="atomWeight"
@@ -49,12 +52,14 @@ function Atom(props) {
 					value={props.atomWeight}
 					type="text"
 				/>
+				<div className="error atomWeight"></div>
 				<label htmlFor="atomType">Atom Type</label>
-				<select id="atomType" onChange={props.onUpdateAtomType} value={props.atomType}>
+				<select id="atomType" className="atom-select" onChange={props.onUpdateAtomType} value={props.atomType}>
 					<option value="metal">Metal</option>
 					<option value="transition">Transition</option>
 					<option value="ium">-ium</option>
 				</select>
+				<div className="error atomType"></div>
 				<label htmlFor="atomColor">Atom Color</label>
 				<input
 					id="atomColor"
@@ -64,6 +69,7 @@ function Atom(props) {
 					value={props.atomColor}
 					type="text"
 				/>
+				<div className="error atomColor"></div>
 				<input
 					className="hidden"
 					type="submit"

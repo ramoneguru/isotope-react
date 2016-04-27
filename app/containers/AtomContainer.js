@@ -23,7 +23,7 @@ var AtomContainer = React.createClass({
 				atomSymbol: 'Ex',
 				atomName: 'Symbol name',
 				atomWeight: '0',
-				atomColor: '',
+				atomColor: '#757575',
 				atomType: 'metal',
 				originalIndex: 0,
 				visible: true,
