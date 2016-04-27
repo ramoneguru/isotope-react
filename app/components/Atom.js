@@ -50,7 +50,7 @@ function Atom(props) {
 					type="text"
 				/>
 				<label htmlFor="atomType">Atom Type</label>
-				<select onChange={props.onUpdateAtomType} value={props.atomType}>
+				<select id="atomType" onChange={props.onUpdateAtomType} value={props.atomType}>
 					<option value="metal">Metal</option>
 					<option value="transition">Transition</option>
 					<option value="ium">-ium</option>
