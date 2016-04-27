@@ -8,7 +8,7 @@ var PropTypes = React.PropTypes;
 function Atom(props) {
 	return (
 		<div className="atom-input">
-			<form onSubmit={props.onSubmitAtom}>
+			<form classID="atom-form" onSubmit={props.onSubmitAtom}>
 				<label htmlFor="atomNumber">Atom Number</label>
 				<input
 					id="atomNumber"

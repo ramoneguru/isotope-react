@@ -4,6 +4,7 @@
 
 var React = require('react');
 var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+require('../styles/layout/common.scss');
 
 var Main = React.createClass({
 	render: function() {

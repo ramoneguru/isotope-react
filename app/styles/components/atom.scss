@@ -4,11 +4,11 @@ $atomBorder: $black;
 
 .atom-container {
 	display: flex;
-	width: 600px;
+	width: 100%;
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: center;
-	margin: auto;
+	margin: 0;
 }
 
 .atom {
@@ -30,8 +30,12 @@ $atomBorder: $black;
 }
 
 .atom-input {
-	float: left;
 	border: 1px solid $atomBorder;
+	padding: 20px;
+	margin: 20px;
+	.atom-form {
+
+	}
 }
 
 .atom-preview {
@@ -39,7 +43,6 @@ $atomBorder: $black;
 	position: relative;
 	height: 100px;
 	width: 100px;
-	float: left;
 }
 
 .atom-number {
@@ -67,4 +70,15 @@ $atomBorder: $black;
 	width: 500px;
 	height: 300px;
 	border: 1px solid $atomBorder;
+}
+
+@media (min-width: 1200px) {
+	.atom-container {
+		display: flex;
+		width: 600px;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+		margin: auto;
+	}
 }

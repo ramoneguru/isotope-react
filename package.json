@@ -8,7 +8,7 @@
     "webpack": "./node_modules/.bin/webpack",
     "watch": "./node_modules/.bin/webpack -w",
     "prod": "webpack -p",
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server --host 0.0.0.0"
   },
   "author": "Nicholas Esquerra",
   "license": "MIT",
