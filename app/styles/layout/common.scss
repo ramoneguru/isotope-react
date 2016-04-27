@@ -1,15 +1,21 @@
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
+
 html {
-  font-family: "Verdana, Geneva", sans-serif;
-  font-size: 16px;
+	font-family: "Verdana, Geneva", sans-serif;
+	font-size: 16px;
 }
+
 label {
-  display: block;
+	display: block;
 }
 
 .hidden {
-  display: none;
-  height: 100px;
+	display: none;
+	height: 100px;
+}
+
+.btn {
+
 }

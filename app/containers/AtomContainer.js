@@ -211,7 +211,7 @@ var AtomContainer = React.createClass({
 					onSortByName={this.handleSorting.bind(this, 'atomName')}
 					onSortBySymbol={this.handleSorting.bind(this, 'atomSymbol')}
 					onSortByNumber={this.handleSorting.bind(this, 'atomNumber')}
-					onSortByOriginalOrder={this.handleSorting.bind(this, 'originalOrder')}
+					onSortByOriginalOrder={this.handleSorting.bind(this, 'originalIndex')}
 				/>
 				<Filter
 					onFilterShowAll={this.handleFiltering.bind(this, 'all')}

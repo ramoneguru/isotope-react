@@ -3,6 +3,7 @@
  */
 
 var React = require('react');
+require('../styles/vendor/normalize.css');
 
 function MainContainer(props) {
 	return (

@@ -6,7 +6,8 @@ var React = require('react');
 var PropTypes = React.PropTypes;
 
 function AtomDisplay(props) {
-	var transform, atomStyles, atomLeave = '';
+	var transform, atomStyles, atomLeave = (!props.visible) ? "leave" : "";
+
 	transform = (props.visible) ?
 	'translate3d('+props.left+'px, '+props.top+'px, 0px) scale(1)':
 	'translate3d('+props.left+'px, '+props.top+'px, 0px) scale(0)';
@@ -15,8 +16,6 @@ function AtomDisplay(props) {
 		backgroundColor: props.atomColor,
 		transform: transform
 	};
-
-	atomLeave = (!props.visible) ? "atom-leave": "";
 
 	return (
 		<div className={"atom " + atomLeave } style={atomStyles}>
