@@ -6,11 +6,11 @@ var React = require('react');
 var PropTypes = React.PropTypes;
 
 function AtomDisplay(props) {
-	var transform, atomStyles, atomLeave = (!props.visible) ? "leave" : "";
+	var transform, atomStyles, atomLeave = (!props.visible) ? "leave" : "enter";
 
 	transform = (props.visible) ?
-	'translate3d('+props.left+'px, '+props.top+'px, 0px) scale(1)':
-	'translate3d('+props.left+'px, '+props.top+'px, 0px) scale(0)';
+	'translate3d('+props.left+'px, '+props.top+'px, 0px) scale(1,1)':
+	'translate3d('+props.left+'px, '+props.top+'px, 0px) scale(0.1,0.1)';
 
 	atomStyles = {
 		backgroundColor: props.atomColor,

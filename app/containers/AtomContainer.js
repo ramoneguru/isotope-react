@@ -169,7 +169,8 @@ var AtomContainer = React.createClass({
 
 	},
 	handleListResize: function(e) {
-		console.log('in here 1');
+		// get atom-container width
+		console.log(window.innerWidth, window.innerHeight);
 	},
 
 	setOffset: function(item, i) {
@@ -228,7 +229,7 @@ var AtomContainer = React.createClass({
 				<List
 					atomList={this.state.atomList}
 					atomListColumns={this.state.atomListColumns}
-					onListResize={Helpers.debounce(this.handleListResize, 1000, true)}
+					onListResize={Helpers.debounce(this.handleListResize, 500)}
 				/>
 			</div>
 		)

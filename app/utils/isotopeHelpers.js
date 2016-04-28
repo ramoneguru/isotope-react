@@ -23,11 +23,12 @@ var helpers = {
 	 * @param thisArg
 	 * @returns {Function}
 	 */
-	throttle: function(fn, threshold = 250, thisArg) {
+	throttle: function(fn, threshold, thisArg) {
 		var later, last = 0;
 		return function() {
 			var args = arguments,
 				context = thisArg || this,
+				threshold = threshold || 250,
 				now = +new Date;
 			if(last && now < last + threshold) {
 
@@ -43,10 +44,12 @@ var helpers = {
 		}
 	},
 
-	debounce: function(fn, threshold = 100, runNow = false, thisArg) {
+	debounce: function(fn, threshold, runNow, thisArg) {
 		var timer, later;
 		return function() {
 			var context = thisArg || this,
+				threshold = threshold || 100,
+				runNow = runNow || false,
 				args = arguments;
 
 			later = () => {
