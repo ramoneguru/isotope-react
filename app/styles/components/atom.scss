@@ -97,13 +97,13 @@ $atomContainerBackground: $blackDark;
 	padding: 5px 0;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 736px) {
 	.atom-container {
 		display: flex;
 		width: 600px;
 		flex-direction: row;
 		flex-wrap: wrap;
-		justify-content: flex-start;
+		justify-content: center;
 		margin: auto;
 	}
 }
