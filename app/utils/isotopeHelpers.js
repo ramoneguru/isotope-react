@@ -16,6 +16,13 @@ var helpers = {
 		if(a[sortBy] < b[sortBy]) { return -1; }
 		return 0;
 	},
+	/**
+	 * Throttles execution of an event with a default threshold of 250ms
+	 * @param fn
+	 * @param threshold
+	 * @param thisArg
+	 * @returns {Function}
+	 */
 	throttle: function(fn, threshold = 250, thisArg) {
 		var later, last = 0;
 		return function() {
@@ -34,6 +41,29 @@ var helpers = {
 				fn.apply(context, args);
 			}
 		}
+	},
+
+	debounce: function(fn, threshold = 100, runNow = false, thisArg) {
+		var timer, later;
+		return function() {
+			var context = thisArg || this,
+				args = arguments;
+
+			later = () => {
+				if(!runNow) {
+					fn.apply(context, args);
+				}
+				timer = null;
+			};
+
+			if(timer) {
+				clearTimeout(timer);
+			} else if(runNow) {
+				fn.apply(context, args);
+			}
+
+			timer = setTimeout(later, threshold);
+		};
 	}
 };
 

@@ -10,6 +10,9 @@ var List = React.createClass({
 	componentWillMount: function() {
 		window.addEventListener('resize', this.props.onListResize);
 	},
+	componentWillUnmount: function() {
+		window.removeEventListener('resize', this.props.onListResize);
+	},
 	render: function() {
 		return (
 			<div className="atom-list">
