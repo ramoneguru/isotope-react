@@ -2,6 +2,7 @@
 
 $atomBorder: $black;
 $atomContainerBackground: $blackDark;
+$metalBackground: $green;
 
 .atom-container {
 	display: flex;
@@ -55,6 +56,10 @@ $atomContainerBackground: $blackDark;
 		border: 0;
 		width: 100%;
 	}
+	select option[value="metal"] {
+		background-color: $metalBackground;
+		color: $black;
+	}
 }
 
 .atom-preview {
@@ -81,12 +86,6 @@ $atomContainerBackground: $blackDark;
 
 .atom-weight {
 	font-size: 0.8em;
-}
-
-.atom-list {
-	position: relative;
-	width: 100%;
-	border: 1px solid $atomBorder;
 }
 
 .error {

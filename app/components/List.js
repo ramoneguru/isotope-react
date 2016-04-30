@@ -6,6 +6,8 @@ var React = require('react');
 var PropTypes = React.PropTypes;
 var AtomDisplay = require('./AtomDisplay');
 
+require('../styles/components/list.scss');
+
 var List = React.createClass({
 	componentWillMount: function() {
 		window.addEventListener('resize', this.props.onListResize);
@@ -17,7 +19,6 @@ var List = React.createClass({
 		var listStyles = {
 			height: this.props.atomListHeight + "px"
 		};
-		console.log(listStyles);
 		return (
 			<div className="atom-list" style={listStyles}>
 				{this.props.atomList.map((item, i) => {

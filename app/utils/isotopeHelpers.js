@@ -5,16 +5,43 @@
 
 var helpers = {
 	/**
+	 * Returns all the visible items in the list, checks the item.visible bool value
+	 * in order to dertermine if an item is visible or not.
+	 * @param list
+	 * @returns {*}
+	 */
+	getVisibleItems: function(list) {
+		var visibleSet = list.filter((item) => {
+			if(item.visible) {
+				return item;
+			}
+		});
+		return visibleSet;
+	},
+	/**
 	 * Compare function for sorting which is used in javascript's .sort.
 	 * @param a
 	 * @param b
 	 * @param sortBy
 	 * @returns {number}
 	 */
-	determineSort: function(a, b, sortBy) {
+	getSortByLargest: function(a, b, sortBy) {
 		if(a[sortBy] > b[sortBy]) { return 1; }
 		if(a[sortBy] < b[sortBy]) { return -1; }
 		return 0;
+	},
+
+	getRowsAndColumns: function(listSize, containerWidth, itemWidth, itemHeight) {
+		var totalItemWidth = listSize * itemWidth;
+		var dimensions = {};
+		if (totalItemWidth < containerWidth) {
+			dimensions.columns = listSize;
+			dimensions.rows = 1;
+		} else {
+			dimensions.columns = Math.floor(containerWidth / itemWidth);
+			dimensions.rows = Math.ceil(listSize / dimensions.columns);
+		}
+		return dimensions;
 	},
 	/**
 	 * Throttles execution of an event with a default threshold of 250ms
@@ -30,7 +57,7 @@ var helpers = {
 				context = thisArg || this,
 				threshold = (threshold) ? threshold : 300,
 				now = +new Date;
-			
+
 			if(last && now < last + threshold) {
 				clearTimeout(later);
 				later = setTimeout(() => {

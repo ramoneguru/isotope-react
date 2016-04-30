@@ -34,6 +34,8 @@ var AtomContainer = React.createClass({
 			atomWidth: 100,
 			atomHeight: 100,
 			atomPadding: 10,
+			atomFullWidth: 110,
+			atomFullHeight: 110,
 			atomListColumns: 3,
 			atomListHeight: 300,
 			atomList: [
@@ -59,7 +61,7 @@ var AtomContainer = React.createClass({
 					"visible": true,
 					"atomType": 'transition',
 					"top": 0,
-					"left": 110
+					"left": 0
 				},
 				{
 					"atomNumber": "12",
@@ -71,7 +73,7 @@ var AtomContainer = React.createClass({
 					"visible": true,
 					"atomType": 'ium',
 					"top": 0,
-					"left": 220
+					"left": 0
 				},
 				{
 					"atomNumber": "12",
@@ -82,36 +84,18 @@ var AtomContainer = React.createClass({
 					"originalIndex": 3,
 					"visible": true,
 					"atomType": 'metal',
-					"top": 110,
+					"top": 0,
 					"left": 0
 				}
 			]
 		}
 	},
-
+	componentDidMount: function() {
+		this.handleListResize();
+	},
 	handleSubmitAtom: function(e) {
-		var atom, list, top, largest, left;
+		var atom, list;
 		e.preventDefault();
-
-		largest = this.state.atomList.filter((item) => {
-			return item.visible;
-		}).reduce((prev, curr) => {
-			return (prev.top > curr.top) ? prev : curr;
-		}, 0);
-
-		if(this.state.atomList.length === 0) {
-			top = 0;
-			left = 0;
-		} else if(largest.left === 0) {
-			top = largest.top;
-			left = largest.left + this.state.atomWidth + this.state.atomPadding;
-		} else if(largest.left === ((this.state.atomListColumns - 1) * (this.state.atomWidth + this.state.atomPadding))) {
-			top = largest.top + this.state.atomHeight + this.state.atomPadding;
-			left = 0;
-		} else {
-			top = largest.top;
-			left = largest.left + this.state.atomWidth + this.state.atomPadding;
-		}
 
 		atom = {
 			"atomNumber": this.state.atom.atomNumber,
@@ -122,13 +106,15 @@ var AtomContainer = React.createClass({
 			"atomType": this.state.atom.atomType,
 			"originalIndex": this.state.atomList.length - 1,
 			"visible": true,
-			"top": top,
-			"left": left
+			"top": 0,
+			"left": 0
 		};
 
 		list = update(this.state.atomList, {$push: [atom]});
 		this.setState({
 			atomList: list
+		}, () => {
+			this.handleListResize();
 		});
 	},
 	handleUpdateAtom: function(e) {
@@ -139,14 +125,11 @@ var AtomContainer = React.createClass({
 			atom: updatedAtom
 		})
 	},
+
 	handleSorting: function(sortBy) {
 		var list = this.state.atomList.slice(0);
-		var filterList = list.filter((item) => {
-			if(item.visible) {
-				return item;
-			}
-		}).sort((prev, curr) => {
-			return Helpers.determineSort(prev, curr, sortBy);
+		Helpers.getVisibleItems(list).sort((prev, curr) => {
+			return Helpers.getSortByLargest(prev, curr, sortBy);
 		}).map((item, i) => {
 			this.setOffset(item, i);
 		});
@@ -155,6 +138,7 @@ var AtomContainer = React.createClass({
 			atomList: list
 		});
 	},
+
 	handleFiltering: function(filter) {
 		var list = this.state.atomList.slice(0);
 		var filterList = list.filter((item) => {
@@ -165,49 +149,34 @@ var AtomContainer = React.createClass({
 				item.visible = false;
 				return false;
 			}
-		}).map((item, i) => {
-			return this.setOffset(item, i);
 		});
 
 		this.setState({
 			atomList: list
+		}, () => {
+			this.handleListResize();
 		});
 
 	},
+
 	handleListResize: function(e) {
-		var columnsPossible;
-		var listWidth = ReactDOM.findDOMNode(this.refs.list_tag).offsetWidth;
-		var len = this.state.atomList.length;
-		var totalWidth = len * (this.state.atomWidth + this.state.atomPadding);
-		var list, totalHeight;
+		var list = this.state.atomList.slice(0);
+		var listCurrentWidth = ReactDOM.findDOMNode(this.refs.list_tag).offsetWidth;
+		var dimensions = Helpers.getRowsAndColumns(this.state.atomList.length, listCurrentWidth, this.state.atomFullWidth, this.state.atomFullHeight);
 
-		if(totalWidth < listWidth) {
-			columnsPossible = len;
-			totalHeight = this.state.atomHeight + this.state.atomPadding
-		} else {
-			columnsPossible = Math.floor(listWidth / this.state.atomWidth);
-			totalHeight = Math.ceil(len/columnsPossible) * (this.state.atomHeight + this.state.atomPadding);
-		}
-
-		list = this.state.atomList.slice(0);
-		var filterList = list.filter((item) => {
-			if(item.visible) {
-				return item;
-			}
-		}).map((item, i) => {
-			return this.setOffset(item, i, columnsPossible);
+		Helpers.getVisibleItems(list).map((item, i) => {
+			return this.setOffset(item, i, dimensions.columns);
 		});
 
 		this.setState({
-			atomListColumns: columnsPossible,
+			atomListColumns: dimensions.columns,
 			atomList: list,
-			atomListHeight: totalHeight
+			atomListHeight: (dimensions.rows * this.state.atomFullHeight)
 		});
 	},
 
 	setOffset: function(item, i, cols) {
-		var top, left, atomWidth = this.state.atomWidth + this.state.atomPadding,
-			atomHeight = this.state.atomWidth + this.state.atomPadding,
+		var top, left, atomWidth = this.state.atomFullWidth, atomHeight = this.state.atomFullHeight,
 			cols = (cols === undefined) ? this.state.atomListColumns : cols;
 
 		if(i % cols === 0) {
