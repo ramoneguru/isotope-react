@@ -11,12 +11,11 @@ var helpers = {
 	 * @returns {*}
 	 */
 	getVisibleItems: function(list) {
-		var visibleSet = list.filter((item) => {
+		return list.filter((item) => {
 			if(item.visible) {
 				return item;
 			}
 		});
-		return visibleSet;
 	},
 	/**
 	 * Compare function for sorting which is used in javascript's .sort.
@@ -31,7 +30,7 @@ var helpers = {
 		return 0;
 	},
 
-	getRowsAndColumns: function(listSize, containerWidth, itemWidth, itemHeight) {
+	getRowsAndColumns: function(listSize, containerWidth, itemWidth) {
 		var totalItemWidth = listSize * itemWidth;
 		var dimensions = {};
 		if (totalItemWidth < containerWidth) {

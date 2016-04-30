@@ -1,36 +1,43 @@
 {
-  "name": "isotope-with-react",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "ava 'app/**/*.test.js' --verbose --require ./other/setup-ava-tests.js",
-    "webpack": "./node_modules/.bin/webpack",
-    "watch": "./node_modules/.bin/webpack -w",
-    "prod": "webpack -p",
-    "start": "webpack-dev-server --host 0.0.0.0"
-  },
-  "author": "Nicholas Esquerra",
-  "license": "MIT",
-  "devDependencies": {
-    "babel-core": "^6.7.6",
-    "babel-loader": "^6.2.4",
-    "babel-preset-react": "^6.5.0",
-    "css-loader": "^0.23.1",
-    "html-webpack-plugin": "^2.16.0",
-    "node-sass": "^3.5.3",
-    "sass-loader": "^3.2.0",
-    "style-loader": "^0.13.1",
-    "webpack": "^1.13.0",
-    "webpack-dev-server": "^1.14.1"
-  },
-  "dependencies": {
-    "axios": "^0.10.0",
-    "normalize.css": "^4.1.1",
-    "react": "^15.0.1",
-    "react-addons-css-transition-group": "^15.0.1",
-    "react-addons-update": "^15.0.1",
-    "react-dom": "^15.0.1",
-    "react-router": "^2.3.0"
-  }
+	"name": "isotope-with-react",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ramoneguru/react.git"
+	},
+	"scripts": {
+		"test": "ava 'app/**/*.test.js' --verbose --require ./other/setup-ava-tests.js",
+		"webpack": "./node_modules/.bin/webpack",
+		"watch": "./node_modules/.bin/webpack -w",
+		"prod": "webpack -p",
+		"start": "webpack-dev-server --host 0.0.0.0"
+	},
+	"author": "Nicholas Esquerra",
+	"license": "MIT",
+	"devDependencies": {
+		"babel-core": "^6.7.6",
+		"babel-loader": "^6.2.4",
+		"babel-preset-react": "^6.5.0",
+		"css-loader": "^0.23.1",
+		"enzyme": "^2.2.0",
+		"html-webpack-plugin": "^2.16.0",
+		"node-sass": "^3.5.3",
+		"react-addons-test-utils": "^15.0.2",
+		"react-dom": "^15.0.2",
+		"sass-loader": "^3.2.0",
+		"style-loader": "^0.13.1",
+		"webpack": "^1.13.0",
+		"webpack-dev-server": "^1.14.1"
+	},
+	"dependencies": {
+		"axios": "^0.10.0",
+		"normalize.css": "^4.1.1",
+		"react": "^15.0.1",
+		"react-addons-css-transition-group": "^15.0.1",
+		"react-addons-update": "^15.0.1",
+		"react-dom": "^15.0.1",
+		"react-router": "^2.3.0"
+	}
 }

@@ -160,11 +160,12 @@ var AtomContainer = React.createClass({
 	},
 
 	handleListResize: function(e) {
-		var list = this.state.atomList.slice(0);
 		var listCurrentWidth = ReactDOM.findDOMNode(this.refs.list_tag).offsetWidth;
-		var dimensions = Helpers.getRowsAndColumns(this.state.atomList.length, listCurrentWidth, this.state.atomFullWidth, this.state.atomFullHeight);
+		var list = this.state.atomList.slice(0);
+		var visibleList = Helpers.getVisibleItems(list);
+		var dimensions = Helpers.getRowsAndColumns(visibleList.length, listCurrentWidth, this.state.atomFullWidth);
 
-		Helpers.getVisibleItems(list).map((item, i) => {
+		visibleList.map((item, i) => {
 			return this.setOffset(item, i, dimensions.columns);
 		});
 
