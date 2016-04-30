@@ -4,7 +4,7 @@
 
 var React = require('react');
 var ReactDOM = require('react-dom');
-var Atom = require('../components/Atom');
+var Element = require('../components/Element');
 var AtomDisplay = require('../components/AtomDisplay');
 var Preview = require('../components/Preview');
 var List = require('../components/List');
@@ -93,7 +93,7 @@ var ElementContainer = React.createClass({
 	componentDidMount: function() {
 		this.handleListResize();
 	},
-	handleSubmitAtom: function(e) {
+	handleSubmitElement: function(e) {
 		var atom, list;
 		e.preventDefault();
 
@@ -117,7 +117,7 @@ var ElementContainer = React.createClass({
 			this.handleListResize();
 		});
 	},
-	handleUpdateAtom: function(e) {
+	handleUpdateElement: function(e) {
 		var updatedAtom, obj = {};
 		obj[e.target.id] = e.target.value;
 		updatedAtom = update(this.state.atom, {$merge: obj});
@@ -194,14 +194,14 @@ var ElementContainer = React.createClass({
 	render: function() {
 		return (
 			<div className="atom-container">
-				<Atom
-					onSubmitAtom={this.handleSubmitAtom}
-					onUpdateAtomNumber={this.handleUpdateAtom}
-					onUpdateAtomSymbol={this.handleUpdateAtom}
-					onUpdateAtomName={this.handleUpdateAtom}
-					onUpdateAtomWeight={this.handleUpdateAtom}
-					onUpdateAtomColor={this.handleUpdateAtom}
-					onUpdateAtomType={this.handleUpdateAtom}
+				<Element
+					onSubmitElement={this.handleSubmitElement}
+					onUpdateElementNumber={this.handleUpdateElement}
+					onUpdateElementSymbol={this.handleUpdateElement}
+					onUpdateElementName={this.handleUpdateElement}
+					onUpdateElementWeight={this.handleUpdateElement}
+					onUpdateElementColor={this.handleUpdateElement}
+					onUpdateElementType={this.handleUpdateElement}
 				/>
 				<Preview>
 					<AtomDisplay
