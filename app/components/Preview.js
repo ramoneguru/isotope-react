@@ -6,7 +6,7 @@ var React = require('react');
 
 function Preview(props) {
 	return (
-		<div className="atom-preview">
+		<div className="element-preview">
 			{props.children}
 		</div>
 	)

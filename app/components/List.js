@@ -4,7 +4,7 @@
 
 var React = require('react');
 var PropTypes = React.PropTypes;
-var AtomDisplay = require('./AtomDisplay');
+var ElementDisplay = require('./ElementDisplay');
 
 require('../styles/components/list.scss');
 
@@ -23,7 +23,7 @@ var List = React.createClass({
 			<div className="atom-list" style={listStyles}>
 				{this.props.atomList.map((item, i) => {
 					return (
-						<AtomDisplay
+						<ElementDisplay
 							key={i}
 							left={item.left}
 							top={item.top}

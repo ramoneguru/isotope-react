@@ -5,14 +5,14 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 
-function AtomDisplay(props) {
-	var transform, atomStyles, atomLeave = (!props.visible) ? "leave" : "enter";
+function ElementDisplay(props) {
+	var transform, elementStyles, elementLeave = (!props.visible) ? "leave" : "enter";
 
 	transform = (props.visible) ?
 	'translate3d('+props.left+'px, '+props.top+'px, 0px) scale(1,1)':
 	'translate3d('+props.left+'px, '+props.top+'px, 0px) scale(0.2,0.2)';
 
-	atomStyles = {
+	elementStyles = {
 		backgroundColor: props.atomColor,
 		transform: transform,
 		WebkitTransform: transform,
@@ -20,16 +20,16 @@ function AtomDisplay(props) {
 	};
 
 	return (
-		<div className={"atom " + atomLeave} style={atomStyles}>
-			<div className="atom-number">{props.atomNumber}</div>
-			<div className="atom-symbol">{props.atomSymbol}</div>
-			<div className="atom-name">{props.atomName}</div>
-			<div className="atom-weight">{props.atomWeight}</div>
+		<div className={"element " + elementLeave} style={elementStyles}>
+			<div className="number">{props.atomNumber}</div>
+			<div className="symbol">{props.atomSymbol}</div>
+			<div className="name">{props.atomName}</div>
+			<div className="weight">{props.atomWeight}</div>
 		</div>
 	)
 }
 
-AtomDisplay.propTypes = {
+ElementDisplay.propTypes = {
 	top: PropTypes.number.isRequired,
 	left: PropTypes.number.isRequired,
 	atomNumber: PropTypes.string.isRequired,
@@ -41,4 +41,4 @@ AtomDisplay.propTypes = {
 	visible: PropTypes.bool.isRequired
 };
 
-module.exports = AtomDisplay;
+module.exports = ElementDisplay;

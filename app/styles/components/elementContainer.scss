@@ -1,0 +1,24 @@
+@import "../base/colors";
+$elementContainerBackground: $blackDark;
+.element-container {
+	display: flex;
+	width: 100%;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin: 0;
+	padding: 10px;
+	background-color: $elementContainerBackground;
+	color: $white;
+}
+
+@media (min-width: 736px) {
+	.element-container {
+		display: flex;
+		width: 60%;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+		margin: auto;
+	}
+}

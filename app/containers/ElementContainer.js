@@ -5,7 +5,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var Element = require('../components/Element');
-var AtomDisplay = require('../components/AtomDisplay');
+var ElementDisplay = require('../components/ElementDisplay');
 var Preview = require('../components/Preview');
 var List = require('../components/List');
 var Sorter = require('../components/Sorter');
@@ -14,7 +14,9 @@ var Helpers = require('../utils/isotopeHelpers');
 
 var update = require('react-addons-update');
 
-require('../styles/components/atom.scss');
+require('../styles/components/elementContainer.scss');
+require('../styles/components/element.scss');
+require('../styles/components/form.scss');
 
 var ElementContainer = React.createClass({
 	getInitialState: function() {
@@ -193,7 +195,7 @@ var ElementContainer = React.createClass({
 	},
 	render: function() {
 		return (
-			<div className="atom-container">
+			<div className="element-container">
 				<Element
 					onSubmitElement={this.handleSubmitElement}
 					onUpdateElementNumber={this.handleUpdateElement}
@@ -204,7 +206,7 @@ var ElementContainer = React.createClass({
 					onUpdateElementType={this.handleUpdateElement}
 				/>
 				<Preview>
-					<AtomDisplay
+					<ElementDisplay
 						atomNumber={this.state.atom.atomNumber}
 						atomSymbol={this.state.atom.atomSymbol}
 						atomName={this.state.atom.atomName}

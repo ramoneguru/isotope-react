@@ -9,57 +9,57 @@ function Element(props) {
 	return (
 		<div className="element-input">
 			<form id="element-form" onSubmit={props.onSubmitElement}>
-				<label htmlFor="elementNumber">Element Number</label>
+				<label htmlFor="element-number">Element Number</label>
 				<input
-					id="elementNumber"
+					id="element-number"
 					maxLength="4"
-					className="form-control"
+					className="element-text-input"
 					placeholder="Element Number"
 					onChange={props.onUpdateElementNumber}
 					value={props.elementNumber}
 					type="text"
 				/>
 				<div className="error elementNumber"></div>
-				<label htmlFor="elementSymbol">Element Symbol</label>
+				<label htmlFor="element-symbol">Element Symbol</label>
 				<input
-					id="elementSymbol"
+					id="element-symbol"
 					maxLength="2"
-					className="form-control"
+					className="element-text-input"
 					placeholder="Element Symbol"
 					onChange={props.onUpdateElementSymbol}
 					value={props.elementSymbol}
 					type="text"
 				/>
-				<div className="error elementSymbol"></div>
-				<label htmlFor="elementName">Element Name</label>
+				<div className="error element-symbol"></div>
+				<label htmlFor="element-name">Element Name</label>
 				<input
-					id="elementName"
+					id="element-name"
 					maxLength="14"
-					className="form-control"
-					placeholder="element Name"
+					className="element-text-input"
+					placeholder="Element Name"
 					onChange={props.onUpdateElementName}
 					value={props.elementName}
 					type="text"
 				/>
-				<div className="error elementName"></div>
-				<label htmlFor="elementWeight">Element Weight</label>
+				<div className="error element-name"></div>
+				<label htmlFor="element-weight">Element Weight</label>
 				<input
-					id="elementWeight"
+					id="element-weight"
 					maxLength="12"
-					className="form-control"
+					className="element-text-input"
 					placeholder="Element Weight"
 					onChange={props.onUpdateElementWeight}
 					value={props.elementWeight}
 					type="text"
 				/>
-				<div className="error elementWeight"></div>
-				<label htmlFor="elementType">Element Type</label>
-				<select id="elementType" className="element-select" onChange={props.onUpdateElementType} value={props.elementType}>
+				<div className="error element-weight"></div>
+				<label htmlFor="element-type">Element Type</label>
+				<select id="element-type" className="element-select" onChange={props.onUpdateElementType} value={props.elementType}>
 					<option value="metal">Metal</option>
 					<option value="transition">Transition</option>
 					<option value="ium">-ium</option>
 				</select>
-				<div className="error elementType"></div>
+				<div className="error element-type"></div>
 				<input
 					className="hidden"
 					type="submit"

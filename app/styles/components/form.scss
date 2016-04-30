@@ -1,0 +1,34 @@
+@import "../base/colors";
+$metalBackground: $green;
+
+.element-input {
+	margin: 20px 0 20px 0;
+	display: flex;
+	justify-content: flex-start;
+
+	#element-form {
+		label {
+			padding: 5px 5px 5px 0;
+		}
+		.element-text-input {
+			padding: 5px;
+		}
+		.element-select {
+			border: 0;
+			width: 100%;
+		}
+		select option[value="metal"] {
+			background-color: $metalBackground;
+			color: $black;
+		}
+	}
+}
+
+
+.error {
+	visibility: hidden;
+	height: 15px;
+	font-size: 0.8em;
+	color: $red;
+	padding: 5px 0;
+}
