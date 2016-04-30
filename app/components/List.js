@@ -7,6 +7,9 @@ var PropTypes = React.PropTypes;
 var AtomDisplay = require('./AtomDisplay');
 
 var List = React.createClass({
+	componentDidMount: function() {
+		
+	},
 	componentWillMount: function() {
 		window.addEventListener('resize', this.props.onListResize);
 	},

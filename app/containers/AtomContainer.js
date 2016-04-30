@@ -3,6 +3,7 @@
  */
 
 var React = require('react');
+var ReactDOM = require('react-dom');
 var Atom = require('../components/Atom');
 var AtomDisplay = require('../components/AtomDisplay');
 var Preview = require('../components/Preview');
@@ -170,7 +171,9 @@ var AtomContainer = React.createClass({
 	},
 	handleListResize: function(e) {
 		// get atom-container width
-		console.log(window.innerWidth, window.innerHeight);
+		var t = ReactDOM.findDOMNode(this.refs.list_tag).offsetWidth;
+		console.log(t);
+		//console.log(window.innerWidth, window.innerHeight);
 	},
 
 	setOffset: function(item, i) {
@@ -226,10 +229,10 @@ var AtomContainer = React.createClass({
 					onFilterTransition={this.handleFiltering.bind(this, 'transition')}
 					onFilterIum={this.handleFiltering.bind(this, 'ium')}
 				/>
-				<List
+				<List ref="list_tag"
 					atomList={this.state.atomList}
 					atomListColumns={this.state.atomListColumns}
-					onListResize={Helpers.debounce(this.handleListResize, 500)}
+					onListResize={Helpers.debounce(this.handleListResize, 1000)}
 				/>
 			</div>
 		)

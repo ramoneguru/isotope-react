@@ -28,10 +28,10 @@ var helpers = {
 		return function() {
 			var args = arguments,
 				context = thisArg || this,
-				threshold = threshold || 250,
+				threshold = (threshold) ? threshold : 300,
 				now = +new Date;
+			
 			if(last && now < last + threshold) {
-
 				clearTimeout(later);
 				later = setTimeout(() => {
 					last = now;
@@ -45,12 +45,12 @@ var helpers = {
 	},
 
 	debounce: function(fn, threshold, runNow, thisArg) {
-		var timer, later;
+		var timer = 0, later;
 		return function() {
 			var context = thisArg || this,
-				threshold = threshold || 100,
-				runNow = runNow || false,
-				args = arguments;
+				runNow = (runNow) ? true : false,
+				args = arguments,
+				threshold = (threshold) ? threshold : 300;
 
 			later = () => {
 				if(!runNow) {

@@ -10,7 +10,7 @@ function AtomDisplay(props) {
 
 	transform = (props.visible) ?
 	'translate3d('+props.left+'px, '+props.top+'px, 0px) scale(1,1)':
-	'translate3d('+props.left+'px, '+props.top+'px, 0px) scale(0.1,0.1)';
+	'translate3d('+props.left+'px, '+props.top+'px, 0px) scale(0.2,0.2)';
 
 	atomStyles = {
 		backgroundColor: props.atomColor,
