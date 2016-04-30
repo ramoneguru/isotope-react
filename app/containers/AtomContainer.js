@@ -35,6 +35,7 @@ var AtomContainer = React.createClass({
 			atomHeight: 100,
 			atomPadding: 10,
 			atomListColumns: 3,
+			atomListHeight: 300,
 			atomList: [
 				{
 					"atomNumber": "1",
@@ -146,7 +147,9 @@ var AtomContainer = React.createClass({
 			}
 		}).sort((prev, curr) => {
 			return Helpers.determineSort(prev, curr, sortBy);
-		}).map(this.setOffset);
+		}).map((item, i) => {
+			this.setOffset(item, i);
+		});
 
 		this.setState({
 			atomList: list
@@ -162,7 +165,9 @@ var AtomContainer = React.createClass({
 				item.visible = false;
 				return false;
 			}
-		}).map(this.setOffset);
+		}).map((item, i) => {
+			return this.setOffset(item, i);
+		});
 
 		this.setState({
 			atomList: list
@@ -170,22 +175,47 @@ var AtomContainer = React.createClass({
 
 	},
 	handleListResize: function(e) {
-		// get atom-container width
-		var t = ReactDOM.findDOMNode(this.refs.list_tag).offsetWidth;
-		console.log(t);
-		//console.log(window.innerWidth, window.innerHeight);
+		var columnsPossible;
+		var listWidth = ReactDOM.findDOMNode(this.refs.list_tag).offsetWidth;
+		var len = this.state.atomList.length;
+		var totalWidth = len * (this.state.atomWidth + this.state.atomPadding);
+		var list, totalHeight;
+
+		if(totalWidth < listWidth) {
+			columnsPossible = len;
+			totalHeight = this.state.atomHeight + this.state.atomPadding
+		} else {
+			columnsPossible = Math.floor(listWidth / this.state.atomWidth);
+			totalHeight = Math.ceil(len/columnsPossible) * (this.state.atomHeight + this.state.atomPadding);
+		}
+
+		list = this.state.atomList.slice(0);
+		var filterList = list.filter((item) => {
+			if(item.visible) {
+				return item;
+			}
+		}).map((item, i) => {
+			return this.setOffset(item, i, columnsPossible);
+		});
+
+		this.setState({
+			atomListColumns: columnsPossible,
+			atomList: list,
+			atomListHeight: totalHeight
+		});
 	},
 
-	setOffset: function(item, i) {
+	setOffset: function(item, i, cols) {
 		var top, left, atomWidth = this.state.atomWidth + this.state.atomPadding,
-			atomHeight = this.state.atomWidth + this.state.atomPadding;
+			atomHeight = this.state.atomWidth + this.state.atomPadding,
+			cols = (cols === undefined) ? this.state.atomListColumns : cols;
 
-		if(i % this.state.atomListColumns === 0) {
-			top = (i === 0) ? 0 : Math.floor(i / this.state.atomListColumns) * atomHeight;
+		if(i % cols === 0) {
+			top = (i === 0) ? 0 : Math.floor(i / cols) * atomHeight;
 			left = 0;
 		} else {
-			top = Math.floor(i / this.state.atomListColumns) * atomHeight;
-			left = (i % this.state.atomListColumns) * atomWidth;
+			top = Math.floor(i / cols) * atomHeight;
+			left = (i % cols) * atomWidth;
 		}
 		item.top = top;
 		item.left = left;
@@ -231,7 +261,7 @@ var AtomContainer = React.createClass({
 				/>
 				<List ref="list_tag"
 					atomList={this.state.atomList}
-					atomListColumns={this.state.atomListColumns}
+					atomListHeight={this.state.atomListHeight}
 					onListResize={Helpers.debounce(this.handleListResize, 1000)}
 				/>
 			</div>

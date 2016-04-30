@@ -7,9 +7,6 @@ var PropTypes = React.PropTypes;
 var AtomDisplay = require('./AtomDisplay');
 
 var List = React.createClass({
-	componentDidMount: function() {
-		
-	},
 	componentWillMount: function() {
 		window.addEventListener('resize', this.props.onListResize);
 	},
@@ -17,8 +14,12 @@ var List = React.createClass({
 		window.removeEventListener('resize', this.props.onListResize);
 	},
 	render: function() {
+		var listStyles = {
+			height: this.props.atomListHeight + "px"
+		};
+		console.log(listStyles);
 		return (
-			<div className="atom-list">
+			<div className="atom-list" style={listStyles}>
 				{this.props.atomList.map((item, i) => {
 					return (
 						<AtomDisplay
@@ -41,7 +42,9 @@ var List = React.createClass({
 })
 
 List.propTypes = {
-	atomList: PropTypes.array.isRequired
+	atomList: PropTypes.array.isRequired,
+	atomListHeight: PropTypes.number.isRequired,
+	onListResize: PropTypes.func
 };
 
 module.exports = List;
