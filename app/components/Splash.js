@@ -11,7 +11,7 @@ const IsotopeStart = React.createClass({
 		return (
 			<MainContainer>
 				<h1>Isotope Clone!!!</h1>
-				<Link to="/atom">
+				<Link to="/element">
 					<button className="btn">Go to Demo</button>
 				</Link>
 			</MainContainer>

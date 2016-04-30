@@ -16,7 +16,7 @@ var update = require('react-addons-update');
 
 require('../styles/components/atom.scss');
 
-var AtomContainer = React.createClass({
+var ElementContainer = React.createClass({
 	getInitialState: function() {
 		return {
 			atom: {
@@ -239,4 +239,4 @@ var AtomContainer = React.createClass({
 	}
 });
 
-module.exports = AtomContainer;
+module.exports = ElementContainer;
