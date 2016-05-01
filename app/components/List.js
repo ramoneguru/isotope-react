@@ -17,21 +17,21 @@ var List = React.createClass({
 	},
 	render: function() {
 		var listStyles = {
-			height: this.props.atomListHeight + "px"
+			height: this.props.elementListHeight + "px"
 		};
 		return (
 			<div className="element-list" style={listStyles}>
-				{this.props.atomList.map((item, i) => {
+				{this.props.elementList.map((item, i) => {
 					return (
 						<ElementDisplay
 							key={i}
 							left={item.left}
 							top={item.top}
-							atomNumber={item.atomNumber}
-							atomSymbol={item.atomSymbol}
-							atomName={item.atomName}
-							atomWeight={item.atomWeight}
-							atomColor={item.atomColor}
+							number={item.number}
+							symbol={item.symbol}
+							name={item.name}
+							weight={item.weight}
+							color={item.color}
 							originalIndex={item.originalIndex}
 							visible={item.visible}
 						/>
@@ -43,8 +43,8 @@ var List = React.createClass({
 })
 
 List.propTypes = {
-	atomList: PropTypes.array.isRequired,
-	atomListHeight: PropTypes.number.isRequired,
+	elementList: PropTypes.array.isRequired,
+	elementListHeight: PropTypes.number.isRequired,
 	onListResize: PropTypes.func
 };
 

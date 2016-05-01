@@ -10,7 +10,7 @@ var Preview = require('../components/Preview');
 var List = require('../components/List');
 var Sorter = require('../components/Sorter');
 var Filter = require('../components/Filter');
-var Helpers = require('../utils/isotopeHelpers');
+var Helpers = require('../utils/elementHelpers');
 
 var update = require('react-addons-update');
 
@@ -21,71 +21,71 @@ require('../styles/components/form.scss');
 var ElementContainer = React.createClass({
 	getInitialState: function() {
 		return {
-			atom: {
-				atomNumber: '0',
-				atomSymbol: 'Ex',
-				atomName: 'Symbol name',
-				atomWeight: '0',
-				atomColor: '#757575',
-				atomType: 'metal',
+			element: {
+				number: '0',
+				symbol: 'Ex',
+				name: 'Symbol name',
+				weight: '0',
+				color: '#757575',
+				type: 'metal',
 				originalIndex: 0,
 				visible: true,
 				top: 0,
 				left: 0
 			},
-			atomWidth: 100,
-			atomHeight: 100,
-			atomPadding: 10,
-			atomFullWidth: 110,
-			atomFullHeight: 110,
-			atomListColumns: 3,
-			atomListHeight: 300,
-			atomList: [
+			elementWidth: 100,
+			elementHeight: 100,
+			elementPadding: 10,
+			elementFullWidth: 110,
+			elementFullHeight: 110,
+			elementListColumns: 3,
+			elementListHeight: 300,
+			elementList: [
 				{
-					"atomNumber": "1",
-					"atomSymbol": "K",
-					"atomName": "Potassium",
-					"atomWeight": "1.23",
-					"atomColor": "red",
+					"number": "1",
+					"symbol": "K",
+					"name": "Potassium",
+					"weight": "1.23",
+					"color": "red",
 					"originalIndex": 0,
 					"visible": true,
-					"atomType": 'metal',
+					"type": 'metal',
 					"top": 0,
 					"left": 0
 				},
 				{
-					"atomNumber": "22",
-					"atomSymbol": "He",
-					"atomName": "Helium",
-					"atomWeight": "1",
-					"atomColor": "teal",
+					"number": "22",
+					"symbol": "He",
+					"name": "Helium",
+					"weight": "1",
+					"color": "teal",
 					"originalIndex": 1,
 					"visible": true,
-					"atomType": 'transition',
+					"type": 'transition',
 					"top": 0,
 					"left": 0
 				},
 				{
-					"atomNumber": "12",
-					"atomSymbol": "Fe",
-					"atomName": "Iron",
-					"atomWeight": "32.3",
-					"atomColor": "blue",
+					"number": "12",
+					"symbol": "Fe",
+					"name": "Iron",
+					"weight": "32.3",
+					"color": "blue",
 					"originalIndex": 2,
 					"visible": true,
-					"atomType": 'ium',
+					"type": 'ium',
 					"top": 0,
 					"left": 0
 				},
 				{
-					"atomNumber": "12",
-					"atomSymbol": "Se",
-					"atomName": "Iron",
-					"atomWeight": "32.3",
-					"atomColor": "blue",
+					"number": "12",
+					"symbol": "Se",
+					"name": "Iron",
+					"weight": "32.3",
+					"color": "blue",
 					"originalIndex": 3,
 					"visible": true,
-					"atomType": 'metal',
+					"type": 'metal',
 					"top": 0,
 					"left": 0
 				}
@@ -96,40 +96,40 @@ var ElementContainer = React.createClass({
 		this.handleListResize();
 	},
 	handleSubmitElement: function(e) {
-		var atom, list;
+		var element, list;
 		e.preventDefault();
 
-		atom = {
-			"atomNumber": this.state.atom.atomNumber,
-			"atomSymbol": this.state.atom.atomSymbol,
-			"atomName": this.state.atom.atomName,
-			"atomWeight": this.state.atom.atomWeight,
-			"atomColor": this.state.atom.atomColor,
-			"atomType": this.state.atom.atomType,
-			"originalIndex": this.state.atomList.length - 1,
+		element = {
+			"number": this.state.element.number,
+			"symbol": this.state.element.symbol,
+			"name": this.state.element.name,
+			"weight": this.state.element.weight,
+			"color": this.state.element.color,
+			"type": this.state.element.type,
+			"originalIndex": this.state.elementList.length - 1,
 			"visible": true,
 			"top": 0,
 			"left": 0
 		};
 
-		list = update(this.state.atomList, {$push: [atom]});
+		list = update(this.state.elementList, {$push: [element]});
 		this.setState({
-			atomList: list
+			elementList: list
 		}, () => {
 			this.handleListResize();
 		});
 	},
 	handleUpdateElement: function(e) {
-		var updatedAtom, obj = {};
+		var updatedElement, obj = {};
 		obj[e.target.id] = e.target.value;
-		updatedAtom = update(this.state.atom, {$merge: obj});
+		updatedElement = update(this.state.element, {$merge: obj});
 		this.setState({
-			atom: updatedAtom
+			element: updatedElement
 		})
 	},
 
 	handleSorting: function(sortBy) {
-		var list = this.state.atomList.slice(0);
+		var list = this.state.elementList.slice(0);
 		Helpers.getVisibleItems(list).sort((prev, curr) => {
 			return Helpers.getSortByLargest(prev, curr, sortBy);
 		}).map((item, i) => {
@@ -137,14 +137,14 @@ var ElementContainer = React.createClass({
 		});
 
 		this.setState({
-			atomList: list
+			elementList: list
 		});
 	},
 
 	handleFiltering: function(filter) {
-		var list = this.state.atomList.slice(0);
+		var list = this.state.elementList.slice(0);
 		var filterList = list.filter((item) => {
-			if(item.atomType === filter || filter === "all") {
+			if(item.type === filter || filter === "all") {
 				item.visible = true;
 				return true;
 			} else {
@@ -154,7 +154,7 @@ var ElementContainer = React.createClass({
 		});
 
 		this.setState({
-			atomList: list
+			elementList: list
 		}, () => {
 			this.handleListResize();
 		});
@@ -163,31 +163,31 @@ var ElementContainer = React.createClass({
 
 	handleListResize: function(e) {
 		var listCurrentWidth = ReactDOM.findDOMNode(this.refs.element_list).offsetWidth;
-		var list = this.state.atomList.slice(0);
+		var list = this.state.elementList.slice(0);
 		var visibleList = Helpers.getVisibleItems(list);
-		var dimensions = Helpers.getRowsAndColumns(visibleList.length, listCurrentWidth, this.state.atomFullWidth);
+		var dimensions = Helpers.getRowsAndColumns(visibleList.length, listCurrentWidth, this.state.elementFullWidth);
 
 		visibleList.map((item, i) => {
 			return this.setOffset(item, i, dimensions.columns);
 		});
 
 		this.setState({
-			atomListColumns: dimensions.columns,
-			atomList: list,
-			atomListHeight: (dimensions.rows * this.state.atomFullHeight)
+			elementListColumns: dimensions.columns,
+			elementList: list,
+			elementListHeight: (dimensions.rows * this.state.elementFullHeight)
 		});
 	},
 
 	setOffset: function(item, i, cols) {
-		var top, left, atomWidth = this.state.atomFullWidth, atomHeight = this.state.atomFullHeight,
-			cols = (cols === undefined) ? this.state.atomListColumns : cols;
+		var top, left, elementWidth = this.state.elementFullWidth, elementHeight = this.state.elementFullHeight,
+			cols = (cols === undefined) ? this.state.elementListColumns : cols;
 
 		if(i % cols === 0) {
-			top = (i === 0) ? 0 : Math.floor(i / cols) * atomHeight;
+			top = (i === 0) ? 0 : Math.floor(i / cols) * elementHeight;
 			left = 0;
 		} else {
-			top = Math.floor(i / cols) * atomHeight;
-			left = (i % cols) * atomWidth;
+			top = Math.floor(i / cols) * elementHeight;
+			left = (i % cols) * elementWidth;
 		}
 		item.top = top;
 		item.left = left;
@@ -207,22 +207,22 @@ var ElementContainer = React.createClass({
 				/>
 				<Preview>
 					<ElementDisplay
-						atomNumber={this.state.atom.atomNumber}
-						atomSymbol={this.state.atom.atomSymbol}
-						atomName={this.state.atom.atomName}
-						atomWeight={this.state.atom.atomWeight}
-						atomColor={this.state.atom.atomColor}
-						originalIndex={this.state.atom.originalIndex}
-						visible={this.state.atom.visible}
-						top={this.state.atom.top}
-						left={this.state.atom.left}
+						number={this.state.element.number}
+						symbol={this.state.element.symbol}
+						name={this.state.element.name}
+						weight={this.state.element.weight}
+						color={this.state.element.color}
+						originalIndex={this.state.element.originalIndex}
+						visible={this.state.element.visible}
+						top={this.state.element.top}
+						left={this.state.element.left}
 					/>
 				</Preview>
 				<Sorter
 					onSortByAll={this.handleFiltering.bind(this, 'all')}
-					onSortByName={this.handleSorting.bind(this, 'atomName')}
-					onSortBySymbol={this.handleSorting.bind(this, 'atomSymbol')}
-					onSortByNumber={this.handleSorting.bind(this, 'atomNumber')}
+					onSortByName={this.handleSorting.bind(this, 'name')}
+					onSortBySymbol={this.handleSorting.bind(this, 'symbol')}
+					onSortByNumber={this.handleSorting.bind(this, 'number')}
 					onSortByOriginalOrder={this.handleSorting.bind(this, 'originalIndex')}
 				/>
 				<Filter
@@ -232,8 +232,8 @@ var ElementContainer = React.createClass({
 					onFilterIum={this.handleFiltering.bind(this, 'ium')}
 				/>
 				<List ref="element_list"
-					atomList={this.state.atomList}
-					atomListHeight={this.state.atomListHeight}
+					elementList={this.state.elementList}
+					elementListHeight={this.state.elementListHeight}
 					onListResize={Helpers.debounce(this.handleListResize, 1000)}
 				/>
 			</div>
