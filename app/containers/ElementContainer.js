@@ -52,7 +52,7 @@ var ElementContainer = React.createClass({
 					"left": 0
 				},
 				{
-					"number": "22",
+					"number": "2",
 					"symbol": "He",
 					"name": "Helium",
 					"weight": "1",
@@ -63,7 +63,7 @@ var ElementContainer = React.createClass({
 					"left": 0
 				},
 				{
-					"number": "12",
+					"number": "4",
 					"symbol": "Fe",
 					"name": "Iron",
 					"weight": "32.3",
@@ -74,7 +74,7 @@ var ElementContainer = React.createClass({
 					"left": 0
 				},
 				{
-					"number": "12",
+					"number": "3",
 					"symbol": "Se",
 					"name": "Iron",
 					"weight": "32.3",
@@ -88,7 +88,19 @@ var ElementContainer = React.createClass({
 		}
 	},
 	componentDidMount: function() {
-		this.handleListResize();
+		var list = this.state.elementList.slice(0);
+		var visibleList = Helpers.getVisibleItems(list);
+		var dimensions = this.getDimensions();
+
+		visibleList.map((item, i) => {
+			return this.setOffset(item, i, dimensions.columns);
+		});
+
+		this.setState({
+			elementList: list,
+			elementListColumns: dimensions.columns,
+			elementListHeight: (dimensions.rows * this.state.elementFullHeight)
+		});
 	},
 	handleSubmitElement: function(e) {
 		var element, lastSpot, offset, dimensions, list, listCurrentWidth ;
@@ -115,6 +127,7 @@ var ElementContainer = React.createClass({
 		dimensions = Helpers.getRowsAndColumns(Helpers.getVisibleItems(list).length, listCurrentWidth, this.state.elementFullWidth);
 		this.setState({
 			elementList: list,
+			elementListColumns: dimensions.columns,
 			elementListHeight: (dimensions.rows * this.state.elementFullHeight)
 		});
 	},
@@ -130,10 +143,10 @@ var ElementContainer = React.createClass({
 
 	handleSorting: function(sortBy) {
 		var list = this.state.elementList.slice(0);
-		Helpers.getVisibleItems(list).sort((prev, curr) => {
+		var filterList = Helpers.getVisibleItems(list).sort((prev, curr) => {
 			return Helpers.getSortByLargest(prev, curr, sortBy);
 		}).map((item, i) => {
-			this.setOffset(item, i);
+			return this.setOffset(item, i);
 		});
 
 		this.setState({
@@ -142,7 +155,7 @@ var ElementContainer = React.createClass({
 	},
 
 	handleFiltering: function(filter) {
-		var dimensions, listCurrentWidth, visibleList;
+		var dimensions;
 		var list = this.state.elementList.slice(0);
 		var filterList = list.filter((item) => {
 			if(item.type === filter || filter === "all") {
@@ -153,7 +166,7 @@ var ElementContainer = React.createClass({
 				return false;
 			}
 		}).map((item, i) => {
-			this.setOffset(item, i);
+			return this.setOffset(item, i);
 		});
 		dimensions = this.getDimensions();
 
@@ -162,17 +175,21 @@ var ElementContainer = React.createClass({
 			elementListColumns: dimensions.columns,
 			elementListHeight: (dimensions.rows * this.state.elementFullHeight)
 		});
-
 	},
 
 	handleListResize: function(e) {
-		var list = this.state.elementList.slice(0);
-		var visibleList = Helpers.getVisibleItems(list);
 		var dimensions = this.getDimensions();
-
-		visibleList.map((item, i) => {
-			return this.setOffset(item, i, dimensions.columns);
+		var list = this.state.elementList.slice(0);
+		
+		var visibleList = Helpers.getVisibleItems(list).map((item, i) => {
+			if( item.left >= (this.state.elementFullWidth * (dimensions.columns)) ) {
+				item.top = item.top + this.state.elementFullWidth;
+				item.left = item.left - (this.state.elementFullWidth * dimensions.columns);
+			}
 		});
+		// console.log(list);
+		// console.log(dimensions);
+		// console.log(this.state);
 
 		this.setState({
 			elementList: list,
