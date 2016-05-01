@@ -20,7 +20,7 @@ var List = React.createClass({
 			height: this.props.atomListHeight + "px"
 		};
 		return (
-			<div className="atom-list" style={listStyles}>
+			<div className="element-list" style={listStyles}>
 				{this.props.atomList.map((item, i) => {
 					return (
 						<ElementDisplay

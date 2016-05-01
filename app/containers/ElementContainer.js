@@ -162,7 +162,7 @@ var ElementContainer = React.createClass({
 	},
 
 	handleListResize: function(e) {
-		var listCurrentWidth = ReactDOM.findDOMNode(this.refs.list_tag).offsetWidth;
+		var listCurrentWidth = ReactDOM.findDOMNode(this.refs.element_list).offsetWidth;
 		var list = this.state.atomList.slice(0);
 		var visibleList = Helpers.getVisibleItems(list);
 		var dimensions = Helpers.getRowsAndColumns(visibleList.length, listCurrentWidth, this.state.atomFullWidth);
@@ -231,7 +231,7 @@ var ElementContainer = React.createClass({
 					onFilterTransition={this.handleFiltering.bind(this, 'transition')}
 					onFilterIum={this.handleFiltering.bind(this, 'ium')}
 				/>
-				<List ref="list_tag"
+				<List ref="element_list"
 					atomList={this.state.atomList}
 					atomListHeight={this.state.atomListHeight}
 					onListResize={Helpers.debounce(this.handleListResize, 1000)}
