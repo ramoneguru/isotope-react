@@ -18,7 +18,18 @@ var helpers = {
 		});
 	},
 	/**
-	 * Compare function for sorting which is used in javascript's .sort.
+	 * Returns the last element in the list that is visible and has the largest
+	 * top value.
+	 * @param list
+	 * @returns {*}
+	 */
+	getLastSpot: function(list) {
+		return this.getVisibleItems(list).reduce((prev, curr) => {
+			return (prev.top >= curr.top && prev.left >= curr.left) ? prev : curr ;
+		}, 0);
+	},
+	/**
+	 * Compare function for sorting which is used in javascript's sort.
 	 * @param a
 	 * @param b
 	 * @param sortBy
@@ -29,18 +40,31 @@ var helpers = {
 		if(a[sortBy] < b[sortBy]) { return -1; }
 		return 0;
 	},
-
+	/**
+	 * Returns the row and column size based on the container width and item width.
+	 * @param listSize
+	 * @param containerWidth
+	 * @param itemWidth
+	 * @returns {{}}
+	 */
 	getRowsAndColumns: function(listSize, containerWidth, itemWidth) {
-		var totalItemWidth = listSize * itemWidth;
-		var dimensions = {};
-		if (totalItemWidth < containerWidth) {
-			dimensions.columns = listSize;
-			dimensions.rows = 1;
+		var columns = Math.floor(containerWidth / itemWidth);
+		var rows = Math.ceil(listSize / columns);
+		return {
+			rows: rows,
+			columns: columns
+		};
+	},
+	getPlacementSpot: function(lastSpot, columns, itemWidth, itemHeight) {
+		var placement = {};
+		if(lastSpot.left < Math.floor((columns - 1) * itemWidth)) {
+			placement.top = lastSpot.top;
+			placement.left = lastSpot.left + itemWidth;
 		} else {
-			dimensions.columns = Math.floor(containerWidth / itemWidth);
-			dimensions.rows = Math.ceil(listSize / dimensions.columns);
+			placement.top = lastSpot.top + itemHeight;
+			placement.left = 0;
 		}
-		return dimensions;
+		return placement;
 	},
 	/**
 	 * Throttles execution of an event with a default threshold of 250ms
@@ -69,7 +93,14 @@ var helpers = {
 			}
 		}
 	},
-
+	/**
+	 * Debounces execution of an event, can also run immediately with the runNow flag set to true
+	 * @param fn
+	 * @param threshold
+	 * @param runNow
+	 * @param thisArg
+	 * @returns {Function}
+	 */
 	debounce: function(fn, threshold, runNow, thisArg) {
 		var timer = 0, later;
 		return function() {

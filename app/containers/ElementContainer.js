@@ -37,7 +37,7 @@ var ElementContainer = React.createClass({
 			elementPadding: 10,
 			elementFullWidth: 110,
 			elementFullHeight: 110,
-			elementListColumns: 3,
+			elementListColumns: 1,
 			elementListHeight: 300,
 			elementList: [
 				{
@@ -91,8 +91,12 @@ var ElementContainer = React.createClass({
 		this.handleListResize();
 	},
 	handleSubmitElement: function(e) {
-		var element, list;
+		var element, lastSpot, offset, dimensions, list, listCurrentWidth ;
 		e.preventDefault();
+
+		listCurrentWidth = ReactDOM.findDOMNode(this.refs.element_list).offsetWidth;
+		lastSpot = Helpers.getLastSpot(this.state.elementList);
+		offset = Helpers.getPlacementSpot(lastSpot, this.state.elementListColumns, this.state.elementFullWidth, this.state.elementFullHeight);
 
 		element = {
 			"number": this.state.element.number,
@@ -102,15 +106,16 @@ var ElementContainer = React.createClass({
 			"type": this.state.element.type,
 			"originalIndex": this.state.elementList.length - 1,
 			"visible": true,
-			"top": 0,
-			"left": 0
+			"top": offset.top,
+			"left": offset.left
 		};
-		console.log(element);
+
 		list = update(this.state.elementList, {$push: [element]});
+
+		dimensions = Helpers.getRowsAndColumns(Helpers.getVisibleItems(list).length, listCurrentWidth, this.state.elementFullWidth);
 		this.setState({
-			elementList: list
-		}, () => {
-			this.handleListResize();
+			elementList: list,
+			elementListHeight: (dimensions.rows * this.state.elementFullHeight)
 		});
 	},
 	handleUpdateElement: function(e) {
@@ -133,10 +138,11 @@ var ElementContainer = React.createClass({
 
 		this.setState({
 			elementList: list
-		});
+		})
 	},
 
 	handleFiltering: function(filter) {
+		var dimensions, listCurrentWidth, visibleList;
 		var list = this.state.elementList.slice(0);
 		var filterList = list.filter((item) => {
 			if(item.type === filter || filter === "all") {
@@ -146,37 +152,45 @@ var ElementContainer = React.createClass({
 				item.visible = false;
 				return false;
 			}
+		}).map((item, i) => {
+			this.setOffset(item, i);
 		});
+		dimensions = this.getDimensions();
 
 		this.setState({
-			elementList: list
-		}, () => {
-			this.handleListResize();
+			elementList: list,
+			elementListColumns: dimensions.columns,
+			elementListHeight: (dimensions.rows * this.state.elementFullHeight)
 		});
 
 	},
 
 	handleListResize: function(e) {
-		var listCurrentWidth = ReactDOM.findDOMNode(this.refs.element_list).offsetWidth;
 		var list = this.state.elementList.slice(0);
 		var visibleList = Helpers.getVisibleItems(list);
-		var dimensions = Helpers.getRowsAndColumns(visibleList.length, listCurrentWidth, this.state.elementFullWidth);
+		var dimensions = this.getDimensions();
 
 		visibleList.map((item, i) => {
 			return this.setOffset(item, i, dimensions.columns);
 		});
 
 		this.setState({
-			elementListColumns: dimensions.columns,
 			elementList: list,
+			elementListColumns: dimensions.columns,
 			elementListHeight: (dimensions.rows * this.state.elementFullHeight)
 		});
+	},
+
+	getDimensions: function() {
+		var listCurrentWidth = ReactDOM.findDOMNode(this.refs.element_list).offsetWidth;
+		var list = this.state.elementList.slice(0);
+		var visibleList = Helpers.getVisibleItems(list);
+		return dimensions = Helpers.getRowsAndColumns(visibleList.length, listCurrentWidth, this.state.elementFullWidth);
 	},
 
 	setOffset: function(item, i, cols) {
 		var top, left, elementWidth = this.state.elementFullWidth, elementHeight = this.state.elementFullHeight,
 			cols = (cols === undefined) ? this.state.elementListColumns : cols;
-
 		if(i % cols === 0) {
 			top = (i === 0) ? 0 : Math.floor(i / cols) * elementHeight;
 			left = 0;
