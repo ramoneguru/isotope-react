@@ -26,7 +26,6 @@ var ElementContainer = React.createClass({
 				symbol: 'Ex',
 				name: 'Symbol name',
 				weight: '0',
-				color: '#757575',
 				type: 'metal',
 				originalIndex: 0,
 				visible: true,
@@ -46,7 +45,6 @@ var ElementContainer = React.createClass({
 					"symbol": "K",
 					"name": "Potassium",
 					"weight": "1.23",
-					"color": "red",
 					"originalIndex": 0,
 					"visible": true,
 					"type": 'metal',
@@ -58,7 +56,6 @@ var ElementContainer = React.createClass({
 					"symbol": "He",
 					"name": "Helium",
 					"weight": "1",
-					"color": "teal",
 					"originalIndex": 1,
 					"visible": true,
 					"type": 'transition',
@@ -70,7 +67,6 @@ var ElementContainer = React.createClass({
 					"symbol": "Fe",
 					"name": "Iron",
 					"weight": "32.3",
-					"color": "blue",
 					"originalIndex": 2,
 					"visible": true,
 					"type": 'ium',
@@ -82,7 +78,6 @@ var ElementContainer = React.createClass({
 					"symbol": "Se",
 					"name": "Iron",
 					"weight": "32.3",
-					"color": "blue",
 					"originalIndex": 3,
 					"visible": true,
 					"type": 'metal',
@@ -104,7 +99,6 @@ var ElementContainer = React.createClass({
 			"symbol": this.state.element.symbol,
 			"name": this.state.element.name,
 			"weight": this.state.element.weight,
-			"color": this.state.element.color,
 			"type": this.state.element.type,
 			"originalIndex": this.state.elementList.length - 1,
 			"visible": true,
@@ -203,7 +197,6 @@ var ElementContainer = React.createClass({
 					onUpdateElementSymbol={this.handleUpdateElement}
 					onUpdateElementName={this.handleUpdateElement}
 					onUpdateElementWeight={this.handleUpdateElement}
-					onUpdateElementColor={this.handleUpdateElement}
 					onUpdateElementType={this.handleUpdateElement}
 				/>
 				<Preview>
@@ -212,7 +205,6 @@ var ElementContainer = React.createClass({
 						symbol={this.state.element.symbol}
 						name={this.state.element.name}
 						weight={this.state.element.weight}
-						color={this.state.element.color}
 						type={this.state.element.type}
 						originalIndex={this.state.element.originalIndex}
 						visible={this.state.element.visible}

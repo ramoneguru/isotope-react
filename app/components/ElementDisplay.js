@@ -34,7 +34,6 @@ ElementDisplay.propTypes = {
 	symbol: PropTypes.string.isRequired,
 	name: PropTypes.string.isRequired,
 	weight: PropTypes.string.isRequired,
-	color: PropTypes.string.isRequired,
 	type: PropTypes.string.isRequired,
 	originalIndex: PropTypes.number.isRequired,
 	visible: PropTypes.bool.isRequired
