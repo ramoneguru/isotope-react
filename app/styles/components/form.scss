@@ -1,5 +1,4 @@
 @import "../base/colors";
-$metalBackground: $green;
 
 .element-input {
 	margin: 20px 0 20px 0;
@@ -16,10 +15,6 @@ $metalBackground: $green;
 		.element-select {
 			border: 0;
 			width: 100%;
-		}
-		select option[value="metal"] {
-			background-color: $metalBackground;
-			color: $black;
 		}
 	}
 }

@@ -111,7 +111,7 @@ var ElementContainer = React.createClass({
 			"top": 0,
 			"left": 0
 		};
-
+		console.log(element);
 		list = update(this.state.elementList, {$push: [element]});
 		this.setState({
 			elementList: list
@@ -120,8 +120,9 @@ var ElementContainer = React.createClass({
 		});
 	},
 	handleUpdateElement: function(e) {
-		var updatedElement, obj = {};
-		obj[e.target.id] = e.target.value;
+		// Target id will come in as element-property so split on "-"
+		var updatedElement, obj = {}, values = e.target.id.split("-");
+		obj[values[1]] = e.target.value;
 		updatedElement = update(this.state.element, {$merge: obj});
 		this.setState({
 			element: updatedElement
@@ -212,6 +213,7 @@ var ElementContainer = React.createClass({
 						name={this.state.element.name}
 						weight={this.state.element.weight}
 						color={this.state.element.color}
+						type={this.state.element.type}
 						originalIndex={this.state.element.originalIndex}
 						visible={this.state.element.visible}
 						top={this.state.element.top}

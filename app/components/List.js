@@ -32,6 +32,7 @@ var List = React.createClass({
 							name={item.name}
 							weight={item.weight}
 							color={item.color}
+							type={item.type}
 							originalIndex={item.originalIndex}
 							visible={item.visible}
 						/>

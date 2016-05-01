@@ -13,14 +13,12 @@ function ElementDisplay(props) {
 	'translate3d('+props.left+'px, '+props.top+'px, 0px) scale(0.2,0.2)';
 
 	elementStyles = {
-		backgroundColor: props.color,
 		transform: transform,
 		WebkitTransform: transform,
 		msTransform: transform
 	};
-
 	return (
-		<div className={"element " + elementLeave} style={elementStyles}>
+		<div className={"element " + props.type + " " + elementLeave} style={elementStyles}>
 			<div className="number">{props.number}</div>
 			<div className="symbol">{props.symbol}</div>
 			<div className="name">{props.name}</div>
@@ -37,6 +35,7 @@ ElementDisplay.propTypes = {
 	name: PropTypes.string.isRequired,
 	weight: PropTypes.string.isRequired,
 	color: PropTypes.string.isRequired,
+	type: PropTypes.string.isRequired,
 	originalIndex: PropTypes.number.isRequired,
 	visible: PropTypes.bool.isRequired
 };

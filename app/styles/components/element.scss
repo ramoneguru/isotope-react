@@ -24,6 +24,15 @@ $elementBorder: $black;
 	&.leave {
 		opacity: 0;
 	}
+	&.metal {
+		background-color: $red;
+	}
+	&.transition {
+		background-color: $blue;
+	}
+	&.ium {
+		background-color: $greenMedium;
+	}
 	.number {
 		visibility: visible;
 		font-size: 0.8em;
