@@ -8,7 +8,7 @@
 		"url": "https://github.com/ramoneguru/react.git"
 	},
 	"scripts": {
-		"test": "ava 'app/**/*.test.js' --verbose --require ./other/setup-ava-tests.js",
+		"test": "mocha test/.setup.js test/**/*-test.js",
 		"webpack": "./node_modules/.bin/webpack",
 		"watch": "./node_modules/.bin/webpack -w",
 		"prod": "webpack -p",
@@ -19,10 +19,14 @@
 	"devDependencies": {
 		"babel-core": "^6.7.6",
 		"babel-loader": "^6.2.4",
+		"babel-preset-airbnb": "^1.1.1",
 		"babel-preset-react": "^6.5.0",
+		"chai": "^3.5.0",
 		"css-loader": "^0.23.1",
 		"enzyme": "^2.2.0",
 		"html-webpack-plugin": "^2.16.0",
+		"jsdom": "^8.5.0",
+		"mocha": "^2.4.5",
 		"node-sass": "^3.5.3",
 		"react-addons-test-utils": "^15.0.2",
 		"react-dom": "^15.0.2",

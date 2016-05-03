@@ -180,7 +180,7 @@ var ElementContainer = React.createClass({
 	handleListResize: function(e) {
 		var dimensions = this.getDimensions();
 		var list = this.state.elementList.slice(0);
-		
+
 		var visibleList = Helpers.getVisibleItems(list).map((item, i) => {
 			if( item.left >= (this.state.elementFullWidth * (dimensions.columns)) ) {
 				item.top = item.top + this.state.elementFullWidth;
@@ -202,7 +202,7 @@ var ElementContainer = React.createClass({
 		var listCurrentWidth = ReactDOM.findDOMNode(this.refs.element_list).offsetWidth;
 		var list = this.state.elementList.slice(0);
 		var visibleList = Helpers.getVisibleItems(list);
-		return dimensions = Helpers.getRowsAndColumns(visibleList.length, listCurrentWidth, this.state.elementFullWidth);
+		return Helpers.getRowsAndColumns(visibleList.length, listCurrentWidth, this.state.elementFullWidth);
 	},
 
 	setOffset: function(item, i, cols) {
