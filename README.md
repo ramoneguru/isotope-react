@@ -16,15 +16,16 @@ I've created a simple form to add an element to a table. You can also filter and
 * Organizing ReactJS code
 
 <h2>Improvements</h2>
-* Not sure why I was naming things with "atom", change it to "element"
+~~* Not sure why I was naming things with "atom", change it to "element"~~
 * Update splash page with something nicer
-* Update form to remove color option, add color with element type
+~~* Update form to remove color option, add color with element type~~
 * Experiment with different form layout
 * Add update/delete element
 
 <h2>Install</h2>
-
-You'll need to have webpack installed globally since I use the webpack-cli for this project.
+Global:
+Node
+Webpack, Webpack-cli
 
 ```
 $> npm install
