@@ -133,7 +133,6 @@ var ElementContainer = React.createClass({
 
 		list = update(this.state.elementList, {$push: [element]});
 		dimensions = Helpers.getRowsAndColumns(Helpers.getVisibleItems(list).length, listCurrentWidth, this.state.elementFullWidth);
-
 		this.setState({
 			elementList: list,
 			elementListColumns: dimensions.columns,

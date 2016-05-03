@@ -25,7 +25,7 @@ var helpers = {
 	 */
 	getLastSpot: function(list) {
 		return this.getVisibleItems(list).reduce((prev, curr) => {
-			return (prev.top >= curr.top && prev.left >= curr.left) ? prev : curr ;
+			return (prev.currentIndex >= curr.currentIndex) ? prev : curr ;
 		}, 0);
 	},
 	/**
