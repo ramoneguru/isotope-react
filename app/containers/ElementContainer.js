@@ -28,6 +28,7 @@ var ElementContainer = React.createClass({
 				weight: '0',
 				type: 'metal',
 				originalIndex: 0,
+				currentIndex: 0,
 				visible: true,
 				top: 0,
 				left: 0
@@ -39,6 +40,9 @@ var ElementContainer = React.createClass({
 			elementFullHeight: 110,
 			elementListColumns: 1,
 			elementListHeight: 300,
+			elementListWidth: 300,
+			elementFilter: "all",
+			elementSort: "all",
 			elementList: [
 				{
 					"number": "1",
@@ -46,6 +50,7 @@ var ElementContainer = React.createClass({
 					"name": "Potassium",
 					"weight": "1.23",
 					"originalIndex": 0,
+					"currentIndex": 0,
 					"visible": true,
 					"type": 'metal',
 					"top": 0,
@@ -57,6 +62,7 @@ var ElementContainer = React.createClass({
 					"name": "Helium",
 					"weight": "1",
 					"originalIndex": 1,
+					"currentIndex": 1,
 					"visible": true,
 					"type": 'transition',
 					"top": 0,
@@ -68,6 +74,7 @@ var ElementContainer = React.createClass({
 					"name": "Iron",
 					"weight": "32.3",
 					"originalIndex": 2,
+					"currentIndex": 2,
 					"visible": true,
 					"type": 'ium',
 					"top": 0,
@@ -76,9 +83,10 @@ var ElementContainer = React.createClass({
 				{
 					"number": "3",
 					"symbol": "Se",
-					"name": "Iron",
+					"name": "Sodium",
 					"weight": "32.3",
 					"originalIndex": 3,
+					"currentIndex": 3,
 					"visible": true,
 					"type": 'metal',
 					"top": 0,
@@ -117,14 +125,15 @@ var ElementContainer = React.createClass({
 			"weight": this.state.element.weight,
 			"type": this.state.element.type,
 			"originalIndex": this.state.elementList.length - 1,
+			"currentIndex": Helpers.getVisibleItems(this.state.elementList).length + 1,
 			"visible": true,
 			"top": offset.top,
 			"left": offset.left
 		};
 
 		list = update(this.state.elementList, {$push: [element]});
-
 		dimensions = Helpers.getRowsAndColumns(Helpers.getVisibleItems(list).length, listCurrentWidth, this.state.elementFullWidth);
+
 		this.setState({
 			elementList: list,
 			elementListColumns: dimensions.columns,
@@ -146,11 +155,13 @@ var ElementContainer = React.createClass({
 		var filterList = Helpers.getVisibleItems(list).sort((prev, curr) => {
 			return Helpers.getSortByLargest(prev, curr, sortBy);
 		}).map((item, i) => {
+			item.currentIndex = i;
 			return this.setOffset(item, i);
 		});
 
 		this.setState({
-			elementList: list
+			elementList: list,
+			elementSort: sortBy
 		})
 	},
 
@@ -166,11 +177,14 @@ var ElementContainer = React.createClass({
 				return false;
 			}
 		}).map((item, i) => {
+			item.currentIndex = i;
 			return this.setOffset(item, i);
 		});
+
 		dimensions = this.getDimensions();
 
 		this.setState({
+			elementFilter: filter,
 			elementList: list,
 			elementListColumns: dimensions.columns,
 			elementListHeight: (dimensions.rows * this.state.elementFullHeight)
@@ -180,22 +194,36 @@ var ElementContainer = React.createClass({
 	handleListResize: function(e) {
 		var dimensions = this.getDimensions();
 		var list = this.state.elementList.slice(0);
-
-		var visibleList = Helpers.getVisibleItems(list).map((item, i) => {
-			if( item.left >= (this.state.elementFullWidth * (dimensions.columns)) ) {
-				item.top = item.top + this.state.elementFullWidth;
-				item.left = item.left - (this.state.elementFullWidth * dimensions.columns);
+		var map = this.getResizeMap(dimensions);
+		var obj;
+		var filterList = Helpers.getVisibleItems(list).map((item, i) => {
+			obj = map[item.currentIndex];
+			if(obj) {
+				item.top = obj.top;
+				item.left = obj.left;
 			}
 		});
-		// console.log(list);
-		// console.log(dimensions);
-		// console.log(this.state);
 
 		this.setState({
 			elementList: list,
 			elementListColumns: dimensions.columns,
 			elementListHeight: (dimensions.rows * this.state.elementFullHeight)
 		});
+	},
+
+	getResizeMap: function(dimensions) {
+		var map = {}, i, j, indexCount = 0;
+		for(i = 0; i < dimensions.rows; i += 1) {
+			for(j = 0; j < dimensions.columns; j += 1) {
+				map[indexCount] = {
+					"currentIndex": indexCount,
+					"top": i * this.state.elementFullHeight,
+					"left": j * this.state.elementFullWidth
+				};
+				indexCount++;
+			}
+		}
+		return map;
 	},
 
 	getDimensions: function() {
