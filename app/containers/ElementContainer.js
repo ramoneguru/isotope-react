@@ -125,7 +125,7 @@ var ElementContainer = React.createClass({
 			"weight": this.state.element.weight,
 			"type": this.state.element.type,
 			"originalIndex": this.state.elementList.length - 1,
-			"currentIndex": Helpers.getVisibleItems(this.state.elementList).length + 1,
+			"currentIndex": Helpers.getVisibleItems(this.state.elementList).length,
 			"visible": true,
 			"top": offset.top,
 			"left": offset.left
@@ -202,6 +202,7 @@ var ElementContainer = React.createClass({
 				item.top = obj.top;
 				item.left = obj.left;
 			}
+			return item;
 		});
 
 		this.setState({
