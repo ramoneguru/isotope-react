@@ -1,19 +1,19 @@
-var React = require('react');
-var Chai = require('chai');
-var Enzyme = require('enzyme');
+import React from 'react';
 
-var Element = require('./element.spec');
+import { shallow, mount, render } from 'enzyme';
+import Element from '../components/Element';
 
-describe("A suite", () => {
-	it("contains spec with an expectation", () => {
-		expect(shallow(<Element />).contains(<div className="element" />)).to.equal(true);
+describe("<Element />", () => {
+	it("should have the className element-input", function() {
+		expect(shallow(<Element
+							onSubmitElement={() => {}}
+							onUpdateElementNumber={() => {}}
+							onUpdateElementName={() => {}}
+							onUpdateElementSymbol={() => {}}
+							onUpdateElementWeight={() => {}}
+							onUpdateElementType={() => {}}
+
+						/>).is(".element-input")).toBe(true);
 	});
 
-	it("contains spec with an expectation", () => {
-		expect(shallow(<Element />).is('.element')).to.equal(true);
-	});
-
-	it("contains spec with an expectation", () => {
-		expect(mount(<Element />).find('.element').length).to.equal(1);
-	});
 });

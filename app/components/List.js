@@ -9,6 +9,9 @@ var ElementDisplay = require('./ElementDisplay');
 require('../styles/components/list.scss');
 
 var List = React.createClass({
+	componentDidMount: function() {
+		var list = document.getElementsByClassName('element-list');
+	},
 	componentWillMount: function() {
 		window.addEventListener('resize', this.props.onListResize);
 	},

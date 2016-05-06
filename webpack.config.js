@@ -20,5 +20,11 @@ module.exports = {
 			{test: /\.scss$/, loaders: ["style", "css", "sass"]}
 		]
 	},
+	externals: {
+		'cheerio': 'window',
+		'react/addons': true,
+		'react/lib/executionEnvironment': true,
+		'react/lib/ReactContext': true
+	},
 	plugins: [HTMLWebpackPluginConfig]
 };

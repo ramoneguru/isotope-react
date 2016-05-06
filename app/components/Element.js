@@ -42,6 +42,13 @@ function Element(props) {
 					type="text"
 				/>
 				<div className="error element-name"></div>
+				<label htmlFor="element-type">Element Type</label>
+				<select id="element-type" className="element-select" onChange={props.onUpdateElementType} value={props.type}>
+					<option value="metal">Metal</option>
+					<option value="transition">Transition</option>
+					<option value="ium">-ium</option>
+				</select>
+				<div className="error element-type"></div>
 				<label htmlFor="element-weight">Element Weight</label>
 				<input
 					id="element-weight"
@@ -53,13 +60,6 @@ function Element(props) {
 					type="text"
 				/>
 				<div className="error element-weight"></div>
-				<label htmlFor="element-type">Element Type</label>
-				<select id="element-type" className="element-select" onChange={props.onUpdateElementType} value={props.type}>
-					<option value="metal">Metal</option>
-					<option value="transition">Transition</option>
-					<option value="ium">-ium</option>
-				</select>
-				<div className="error element-type"></div>
 				<input
 					className="hidden"
 					type="submit"
