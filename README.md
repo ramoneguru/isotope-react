@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/ramoneguru/isotope-react.svg?branch=master)](https://travis-ci.org/ramoneguru/isotope-react)
 <h1>Isotope (in React)</h1>
 <p>
 I was asked on April 12, 2016 to implement the <a href="http://isotope.metafizzy.co/">isotope jQuery plugin</a> using ReactJS.
@@ -16,9 +17,7 @@ I've created a simple form to add an element to a table. You can also filter and
 * Organizing ReactJS code
 
 <h2>Improvements</h2>
-~~* Not sure why I was naming things with "atom", change it to "element"~~
 * Update splash page with something nicer
-~~* Update form to remove color option, add color with element type~~
 * Experiment with different form layout
 * Add update/delete element
 
