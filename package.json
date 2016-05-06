@@ -47,7 +47,6 @@
 		"mocha": "^2.4.5",
 		"node-sass": "^3.5.3",
 		"phantomjs-prebuilt": "^2.1.4",
-		"react-dom": "^15.0.2",
 		"sass-loader": "^3.2.0",
 		"style-loader": "^0.13.1",
 		"watchify": "^3.7.0",
