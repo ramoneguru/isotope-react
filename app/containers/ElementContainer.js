@@ -110,6 +110,10 @@ var ElementContainer = React.createClass({
 			elementListHeight: (dimensions.rows * this.state.elementFullHeight)
 		});
 	},
+	/**
+	 * Handle for when the user submits the element form. 
+	 * @param e
+	 */
 	handleSubmitElement: function(e) {
 		var element, lastSpot, offset, dimensions, list, listCurrentWidth ;
 		e.preventDefault();
@@ -139,6 +143,11 @@ var ElementContainer = React.createClass({
 			elementListHeight: (dimensions.rows * this.state.elementFullHeight)
 		});
 	},
+
+	/**
+	 * Handle when the user inputs something into the form.
+	 * @param e
+	 */
 	handleUpdateElement: function(e) {
 		// Target id will come in as element-property so split on "-"
 		var updatedElement, obj = {}, values = e.target.id.split("-");
@@ -149,6 +158,10 @@ var ElementContainer = React.createClass({
 		})
 	},
 
+	/**
+	 * Handle when the user taps any of the sort buttons
+	 * @param sortBy
+	 */
 	handleSorting: function(sortBy) {
 		var list = this.state.elementList.slice(0);
 		var filterList = Helpers.getVisibleItems(list).sort((prev, curr) => {
@@ -164,6 +177,10 @@ var ElementContainer = React.createClass({
 		})
 	},
 
+	/**
+	 * Handle when the user taps any of the filter buttons
+	 * @param filter
+	 */
 	handleFiltering: function(filter) {
 		var dimensions;
 		var list = this.state.elementList.slice(0);
@@ -190,6 +207,11 @@ var ElementContainer = React.createClass({
 		});
 	},
 
+	/**
+	 * Handles resizing the element container based on the dimensions acquired from
+	 * this.getDimensions().
+	 * @param e
+	 */
 	handleListResize: function(e) {
 		var dimensions = this.getDimensions();
 		var list = this.state.elementList.slice(0);
@@ -211,6 +233,11 @@ var ElementContainer = React.createClass({
 		});
 	},
 
+	/**
+	 * Returns the hash table that can be created with the given dimensions.
+	 * @param dimensions
+	 * @returns {{}}
+	 */
 	getResizeMap: function(dimensions) {
 		var map = {}, i, j, indexCount = 0;
 		for(i = 0; i < dimensions.rows; i += 1) {
@@ -226,6 +253,11 @@ var ElementContainer = React.createClass({
 		return map;
 	},
 
+	/**
+	 * Gets the current dimensions which is the number of possible rows and columns
+	 * the container can have. This calculation is based on the ref element_list
+	 * @returns {*|{rows, columns}|{}}
+	 */
 	getDimensions: function() {
 		var listCurrentWidth = ReactDOM.findDOMNode(this.refs.element_list).offsetWidth;
 		var list = this.state.elementList.slice(0);
@@ -233,6 +265,14 @@ var ElementContainer = React.createClass({
 		return Helpers.getRowsAndColumns(visibleList.length, listCurrentWidth, this.state.elementFullWidth);
 	},
 
+	/**
+	 * Set the offset(s) of the element. This is primarily used when the user sorts or filters
+	 * elements in the set.
+	 * @param item
+	 * @param i
+	 * @param cols
+	 * @returns {*}
+	 */
 	setOffset: function(item, i, cols) {
 		var top, left, elementWidth = this.state.elementFullWidth, elementHeight = this.state.elementFullHeight,
 			cols = (cols === undefined) ? this.state.elementListColumns : cols;
